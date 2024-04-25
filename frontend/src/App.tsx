@@ -14,21 +14,29 @@ import CareerGuide from "./pages/CareerGuide";
 import JobSearch from "./pages/JobsSearch";
 import MyJobs from "./pages/MyJobs";
 import LogIn from "./pages/LogIn";
+import AddJobListing from "./pages/AddJobListing";
+import useAppContext from "./contexts/useAppContext";
 
 const App = () => {
+  const { isLoggedIn } = useAppContext();
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutus" element={<About />} />
         <Route path="/jobs" element={<JobSearch />} />
-        <Route path="/myjobs" element={<MyJobs />} />
-        <Route path="/employeraccount" element={<EmployerAccount />} />
         <Route path="/careerguide" element={<CareerGuide />} />
-        <Route path="/candidateaccount" element={<CandidateAccount />} />
         <Route path="/joblisting" element={<JobListing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
+        {isLoggedIn && (
+          <>
+            <Route path="/add-job-listing" element={<AddJobListing />} />
+            <Route path="/myjobs" element={<MyJobs />} />
+            <Route path="/employeraccount" element={<EmployerAccount />} />
+            <Route path="/candidateaccount" element={<CandidateAccount />} />
+          </>
+        )}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

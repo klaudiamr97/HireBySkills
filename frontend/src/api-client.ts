@@ -55,3 +55,17 @@ export const logOut = async () => {
     throw new Error("Error during sgin out");
   }
 };
+
+export const addMyJobListing = async (JobListingFormData: FormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/jobs`, {
+    credentials: "include",
+    method: "POST",
+    body: JobListingFormData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add job listing");
+  }
+
+  return response.json();
+};

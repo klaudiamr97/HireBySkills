@@ -29,9 +29,9 @@ const App = () => {
         <Route path="/joblisting" element={<JobListing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/add-job-listing" element={<AddJobListing />} />
         {isLoggedIn && (
           <>
-            <Route path="/add-job-listing" element={<AddJobListing />} />
             <Route path="/myjobs" element={<MyJobs />} />
             <Route path="/employeraccount" element={<EmployerAccount />} />
             <Route path="/candidateaccount" element={<CandidateAccount />} />

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Cta = () => {
   return (
-    <div className="w-screen flex items-center justify-between bg-body py-3">
+    <div className="w-screen flex overflow-hidden items-center justify-between bg-body py-3">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="md:w-2/3 mr-36 flex flex-col">
           <p className="py-16  md:text-2xl  text-left font-heading tracking-px-n leading-tight">

@@ -16,7 +16,7 @@ const Hero: React.FC<HeroProps> = ({
   imgSrc,
 }) => {
   return (
-    <div className="w-screen flex items-center justify-between bg-body py-5">
+    <div className="w-screen overflow-hidden flex items-center justify-between bg-body py-5">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="w-full md:w-1/2 ">
           {title && (

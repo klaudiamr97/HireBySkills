@@ -80,7 +80,7 @@ const JobSearch = () => {
   };
 
   return (
-    <div>
+    <div className=" overflow-hidden">
       <Header />
       <Hero
         title="Skill-Based Job Search Your Ideal Career Awaits Here!"
@@ -88,7 +88,7 @@ const JobSearch = () => {
         buttonLink="/register"
         imgSrc={JoinUs}
       />
-      <section className="py-10 bg-body overflow-hidden">
+      <section className="py-10 bg-body">
         <div className="container mx-auto px-4">
           <div className="py-16 px-8 bg-white rounded-3xl flex flex-wrap">
             <div className="w-full md:w-1/4">
@@ -149,7 +149,6 @@ const JobSearch = () => {
             </div>
             <div className="w-full md:w-3/4 p-8">
               <div className="flex flex-wrap -m-3">
-               
                 {jobListings.map((job) => (
                   <div key={job.id} className="w-full p-3">
                     <div className="p-10 bg-body rounded-3xl">

@@ -10,7 +10,7 @@ import DistanceWorking from "../assets/distance-learning.png";
 
 const CareerGuide = () => {
   return (
-    <div>
+    <div className=" overflow-hidden">
       <Header />
       <Hero
         title="Read Our Expert Guides And Empower Your Career Journey "
@@ -18,7 +18,7 @@ const CareerGuide = () => {
         buttonLink="/register"
         imgSrc={DistanceWorking}
       />
-      <section className="bg-white overflow-hidden">
+      <section className="bg-white">
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="w-full pr-40 md:w-1/2 flex flex-col">
             <img src={CareerImg} alt="man-walking-up-the-stairs" />
@@ -46,7 +46,6 @@ const CareerGuide = () => {
         </div>
       </section>
       <section className="bg-body">
-        
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="md:w-1/2 p-8">
             <h4 className="py-8 text-3xl leading-normal xl:text-10xl font-bold font-heading tracking-px-n">

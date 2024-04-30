@@ -11,8 +11,8 @@ router.post(
   "/login",
   [
     check("email", "Email is required").isEmail(),
-    check("password", "Password with 8 or more characters required").isLength({
-      min: 8,
+    check("password", "Password with 6 or more characters required").isLength({
+      min: 6,
     }),
   ],
   async (req: Request, res: Response) => {
@@ -28,6 +28,7 @@ router.post(
       if (!user) {
         return res.status(400).json({ message: "Invalid Credentials" });
       }
+
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res.status(400).json({ message: "Invalid Credentials" });

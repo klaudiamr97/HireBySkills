@@ -5,7 +5,7 @@ import useAppContext from "../contexts/useAppContext";
 const Header = () => {
   const { isLoggedIn } = useAppContext();
   return (
-    <div className="w-screen flex items-center justify-between px-4 bg-body py-5">
+    <div className="w-screen flex overflow-hidden items-center justify-between px-4 bg-body py-5">
       <div className="container mx-auto flex justify-between">
         <span>
           <Link to="/">

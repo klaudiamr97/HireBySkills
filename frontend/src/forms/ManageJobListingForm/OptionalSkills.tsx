@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { optionalSkillsList } from "../../config/optional-skills-options-config";
+import { skillsList } from "../../config/skills-options-config";
 import { JobListingFormData } from "./ManageJobListingForm";
 
 const OptionalTypeSection = () => {
-  const { register } = useFormContext<JobListingFormData>();
+  const { register, setValue } = useFormContext<JobListingFormData>();
 
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+
+  useEffect(() => {
+    selectedSkills.forEach((skill, index) => {
+      register(`optionalSkills.${index}` as const);
+    });
+  }, [register, selectedSkills]);
 
   const handleSkillSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSkill = event.target.value;
     if (!selectedSkills.includes(selectedSkill)) {
-      setSelectedSkills([...selectedSkills, selectedSkill]);
+      const updatedSkills = [...selectedSkills, selectedSkill];
+      setSelectedSkills(updatedSkills);
+      setValue("optionalSkills", updatedSkills);
+      register(`optionalSkills.${updatedSkills.length - 1}` as const);
     }
   };
 
   return (
-    <section className=" bg-body w-full overflow-hidden">
+    <section className="bg-body w-full overflow-hidden">
       <div className="container px-4 mx-auto">
         <div className="mb-5">
           <label className="block mb-5">Optional Skills</label>
@@ -26,10 +35,10 @@ const OptionalTypeSection = () => {
               className="border border-gray-300 rounded px-3 py-1"
             >
               <option value="" disabled>
-                Select an essential skill
+                Select an optional skill
               </option>
-              {optionalSkillsList.map((skill, index) => (
-                <option key={index} value={skill}>
+              {skillsList.map((skill) => (
+                <option key={skill} value={skill}>
                   {skill}
                 </option>
               ))}
@@ -47,13 +56,6 @@ const OptionalTypeSection = () => {
                 </div>
               ))}
             </div>
-            {/* Register selected skills */}
-            {selectedSkills.length > 0 && (
-              <input
-                type="hidden"
-                {...register("essentialSkills", { value: selectedSkills })}
-              />
-            )}
           </div>
         </div>
       </div>

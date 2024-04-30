@@ -1,4 +1,4 @@
-export const essentialSkillsList = [
+export const skillsList = [
   "Accounting",
   "Active Listening",
   "Adaptability",
@@ -123,4 +123,7 @@ export const essentialSkillsList = [
   "Visual Design",
   "Web Development",
   "WordPress",
+  "Stress Management",
+  "Training",
+  "Counseling",
 ];

@@ -39,7 +39,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="w-screen overflow-hidden flex flex-col min-h-screen">
       <Header />
       <Hero
         title="Unlock Your Potential

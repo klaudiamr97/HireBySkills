@@ -1,15 +1,5 @@
 import mongoose from "mongoose";
-
-export type JobListingType = {
-  _id: string;
-  userId: string;
-  jobTitle: string;
-  location: string;
-  salary: number;
-  essentialSkills: string[];
-  optionalSkills: string[];
-  description: string;
-};
+import { JobListingType } from "../shared/types";
 
 const jobListingSchema = new mongoose.Schema<JobListingType>({
   userId: { type: String, required: true },

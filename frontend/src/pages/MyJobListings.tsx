@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
-import { BsCurrencyPound, BsMap } from "react-icons/bs";
+import { BsBuilding, BsCurrencyPound, BsMap } from "react-icons/bs";
 
 const MyJobListings = () => {
   const { data: JobListingData } = useQuery(
@@ -46,7 +46,11 @@ const MyJobListings = () => {
                 <div className="whitespace-pre-line">
                   {joblisting.description}
                 </div>
-                <div className="grid grid-cols-5 gap-2">
+                <div className="grid grid-cols-4 gap-2 mt-3">
+                  <div className="border border-purple rounded-lg p-3 flex items-center">
+                    <BsBuilding className="mr-1" />
+                    {joblisting.company}
+                  </div>
                   <div className="border border-purple rounded-lg p-3 flex items-center">
                     <BsMap className="mr-1" />
                     {joblisting.location}
@@ -58,7 +62,7 @@ const MyJobListings = () => {
                 </div>
                 <span className="flex justify-end">
                   <Link
-                    to={`/edit-joblisting/${joblisting._id}`}
+                    to={`/edit-job-listing/${joblisting._id}`}
                     className="py-3 px-7 flex text-offwhite font-medium border border-purple rounded-xl focus:ring focus:ring-purple bg-purple hover:bg-dark-purple transition ease-in-out duration-200 disabled:bg-dark-purple"
                   >
                     View Details

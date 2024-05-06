@@ -3,16 +3,22 @@ import { useFormContext } from "react-hook-form";
 import { skillsList } from "../../config/skills-options-config";
 import { JobListingFormData } from "./ManageJobListingForm";
 
-const OptionalTypeSection = () => {
+type Props = {
+  optionalSkills: string[];
+};
+
+const OptionalTypeSection = ({ optionalSkills }: Props) => {
   const { register, setValue } = useFormContext<JobListingFormData>();
 
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [selectedSkills, setSelectedSkills] =
+    useState<string[]>(optionalSkills);
 
   useEffect(() => {
-    selectedSkills.forEach((_skill, index) => {
+    setSelectedSkills(optionalSkills);
+    optionalSkills.forEach((_skill, index) => {
       register(`optionalSkills.${index}` as const);
     });
-  }, [register, selectedSkills]);
+  }, [optionalSkills, register]);
 
   const handleSkillSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSkill = event.target.value;
@@ -20,7 +26,6 @@ const OptionalTypeSection = () => {
       const updatedSkills = [...selectedSkills, selectedSkill];
       setSelectedSkills(updatedSkills);
       setValue("optionalSkills", updatedSkills);
-      register(`optionalSkills.${updatedSkills.length - 1}` as const);
     }
   };
 
@@ -44,15 +49,15 @@ const OptionalTypeSection = () => {
               <option value="" disabled>
                 Select an optional skill
               </option>
-              {skillsList.map((skill) => (
-                <option key={skill} value={skill}>
+              {skillsList.map((skill, index) => (
+                <option key={index} value={skill}>
                   {skill}
                 </option>
               ))}
             </select>
           </div>
           <div>
-            <label className="block mb-4">Selected Skills</label>
+            <label className="block mb-4">Selected Optional Skills</label>
             <div className="flex flex-wrap gap-2">
               {selectedSkills.map((skill, index) => (
                 <div

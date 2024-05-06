@@ -3,16 +3,22 @@ import { useFormContext } from "react-hook-form";
 import { skillsList } from "../../config/skills-options-config";
 import { JobListingFormData } from "./ManageJobListingForm";
 
-const EssentialTypeSection = () => {
+type Props = {
+  essentialSkills: string[];
+};
+
+const EssentialTypeSection = ({ essentialSkills }: Props) => {
   const { register, setValue } = useFormContext<JobListingFormData>();
 
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [selectedSkills, setSelectedSkills] =
+    useState<string[]>(essentialSkills);
 
   useEffect(() => {
-    selectedSkills.forEach((_skill, index) => {
+    setSelectedSkills(essentialSkills);
+    essentialSkills.forEach((_skill, index) => {
       register(`essentialSkills.${index}` as const);
     });
-  }, [register, selectedSkills]);
+  }, [essentialSkills, register]);
 
   const handleSkillSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSkill = event.target.value;
@@ -20,7 +26,6 @@ const EssentialTypeSection = () => {
       const updatedSkills = [...selectedSkills, selectedSkill];
       setSelectedSkills(updatedSkills);
       setValue("essentialSkills", updatedSkills);
-      register(`essentialSkills.${updatedSkills.length - 1}` as const);
     }
   };
 
@@ -52,7 +57,7 @@ const EssentialTypeSection = () => {
             </select>
           </div>
           <div>
-            <label className="block mb-4">Selected Skills</label>
+            <label className="block mb-4">Selected Essential Skills</label>
             <div className="flex flex-wrap gap-2">
               {selectedSkills.map((skill, index) => (
                 <div

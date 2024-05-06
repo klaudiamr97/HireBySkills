@@ -21,6 +21,7 @@ router.post(
   verifyToken,
   [
     body("jobTitle").notEmpty().withMessage("Job title is required"),
+    body("company").notEmpty().withMessage("Company is required"),
     body("location").notEmpty().withMessage("Location is required"),
     body("salary")
       .notEmpty()
@@ -80,36 +81,42 @@ router.get("/:id", verifyToken, async (req: Request, res: Response) => {
   }
 });
 
-router.put("/:listingId", verifyToken, async (req: Request, res: Response) => {
-  try {
-    const updatedListing: JobListingType = req.body;
-    const listing = await JobListing.findOneAndUpdate(
-      {
-        _id: req.params.listingId,
-        userId: req.userId,
-      },
-      updatedListing,
-      { new: true }
-    );
+router.put(
+  "/:listingId",
+  verifyToken,
+  upload.array("imageFiles"),
+  async (req: Request, res: Response) => {
+    try {
+      const updatedListing: JobListingType = req.body;
+      updatedListing.lastUpdated = new Date();
+      const listing = await JobListing.findOneAndUpdate(
+        {
+          _id: req.params.listingId,
+          userId: req.userId,
+        },
+        updatedListing,
+        { new: true }
+      );
 
-    if (!listing) {
-      return res.status(404).json({ message: "Hotel not found" });
+      if (!listing) {
+        return res.status(404).json({ message: "Hotel not found" });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      const updatedImageUrls = await uploadImages(files);
+
+      listing.imageUrls = [
+        ...updatedImageUrls,
+        ...(updatedListing.imageUrls || []),
+      ];
+
+      await listing.save();
+      res.status(201).json(listing);
+    } catch (error) {
+      res.status(500).json({ message: "Something went wrong" });
     }
-
-    const files = req.files as Express.Multer.File[];
-    const updatedImageUrls = await uploadImages(files);
-
-    listing.imageUrls = [
-      ...updatedImageUrls,
-      ...(updatedListing.imageUrls || []),
-    ];
-
-    await listing.save();
-    res.status(201).json(listing);
-  } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
   }
-});
+);
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {

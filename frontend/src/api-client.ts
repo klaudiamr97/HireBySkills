@@ -82,3 +82,32 @@ export const fetchMyJobListings = async (): Promise<JobListingType[]> => {
 
   return response.json();
 };
+
+export const fetchMyJobListingById = async (
+  listingId: string
+): Promise<JobListingType> => {
+  const response = await fetch(`${API_BASE_URL}/api/jobs/${listingId}`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Error fetching job listings");
+  }
+  return response.json();
+};
+
+export const updateMyJobListingById = async (JobListingFormData: FormData) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/jobs/${JobListingFormData.get("listingId")}`,
+    {
+      method: "PUT",
+      body: JobListingFormData,
+      credentials: "include",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update job listing");
+  }
+
+  return response.json();
+};

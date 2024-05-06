@@ -2,6 +2,7 @@ export type JobListingType = {
   _id: string;
   userId: string;
   jobTitle: string;
+  company: string;
   location: string;
   salary: number;
   essentialSkills: string[];

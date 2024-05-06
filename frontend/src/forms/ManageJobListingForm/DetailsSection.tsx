@@ -30,6 +30,23 @@ const JobListingDetailsSection = () => {
           </label>
         </div>
         <div className="flex gap-4">
+        <label className="block mb-5">
+            Company
+            <div className="flex">
+              <input
+                type="text"
+                className="px-4 py-3.5 w-full text-gray-500 font-medium placeholder-gray-500 bg-white outline-none border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
+                {...register("company", {
+                  required: "This field is required",
+                })}
+              />
+            </div>
+            {errors.company && (
+              <span className="text-red font-medium">
+                {errors.company.message}
+              </span>
+            )}
+          </label>
           <label className="block mb-5">
             Location
             <div className="flex">

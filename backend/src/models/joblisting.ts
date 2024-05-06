@@ -3,6 +3,7 @@ import { JobListingType } from "../shared/types";
 
 const jobListingSchema = new mongoose.Schema<JobListingType>({
   userId: { type: String, required: true },
+  company: { type: String, required: true },
   jobTitle: { type: String, required: true },
   location: { type: String, required: true },
   salary: { type: Number, required: true },

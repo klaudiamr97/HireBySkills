@@ -1,55 +1,20 @@
-// import express, { Request, Response } from "express";
-// import JobListing from "../models/joblisting";
-// import { JobListingType } from "../shared/types";
-// import verifyToken from "../middleware/auth";
-// import { body } from "express-validator";
-
-// const router = express.Router();
-
-// router.post(
-//   "/",
-//   verifyToken,
-//   [
-//     body("jobTitle").notEmpty().withMessage("Job title is required"),
-//     body("location").notEmpty().withMessage("Location is required"),
-//     body("salary")
-//       .notEmpty()
-//       .isNumeric()
-//       .withMessage("Salary title is required and must be a number"),
-//     body("essentialSkills")
-//       .notEmpty()
-//       .isArray()
-//       .withMessage("Essential skills are required"),
-//     body("optionalSkills")
-//       .notEmpty()
-//       .isArray()
-//       .withMessage("Optional Skills are required"),
-//     body("description").notEmpty().withMessage("Description is required"),
-//   ],
-//   async (req: Request, res: Response) => {
-//     try {
-//       const newListing: JobListingType = req.body;
-
-//       newListing.userId = req.userId;
-
-//       const listing = new JobListing(newListing);
-//       await listing.save();
-//       res.status(201).send(listing);
-//     } catch (error) {
-//       console.log("Error creating job listing: ", error);
-//       res.status(500).json({ message: "Something went wrong" });
-//     }
-//   }
-// );
-
-// export default router;
 import express, { Request, Response } from "express";
+import multer from "multer";
+import cloudinary from "cloudinary";
 import JobListing from "../models/joblisting";
 import { JobListingType } from "../shared/types";
 import verifyToken from "../middleware/auth";
 import { body } from "express-validator";
 
 const router = express.Router();
+
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB
+  },
+});
 
 router.post(
   "/",
@@ -71,10 +36,16 @@ router.post(
       .withMessage("Optional Skills are required"),
     body("description").notEmpty().withMessage("Description is required"),
   ],
+  upload.array("imageFiles", 1),
   async (req: Request, res: Response) => {
     try {
+      const imageFiles = req.files as Express.Multer.File[];
       const newListing: JobListingType = req.body;
 
+      const imageUrls = await uploadImages(imageFiles);
+
+      newListing.imageUrls = imageUrls;
+      newListing.lastUpdated = new Date();
       newListing.userId = req.userId;
 
       const listing = new JobListing(newListing);
@@ -122,13 +93,34 @@ router.put("/:listingId", verifyToken, async (req: Request, res: Response) => {
     );
 
     if (!listing) {
-      return res.status(404).json({ message: "Job listing not found" });
+      return res.status(404).json({ message: "Hotel not found" });
     }
 
-    res.status(200).json(listing);
+    const files = req.files as Express.Multer.File[];
+    const updatedImageUrls = await uploadImages(files);
+
+    listing.imageUrls = [
+      ...updatedImageUrls,
+      ...(updatedListing.imageUrls || []),
+    ];
+
+    await listing.save();
+    res.status(201).json(listing);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
 });
+
+async function uploadImages(imageFiles: Express.Multer.File[]) {
+  const uploadPromises = imageFiles.map(async (image) => {
+    const b64 = Buffer.from(image.buffer).toString("base64");
+    let dataURI = "data:" + image.mimetype + ";base64," + b64;
+    const res = await cloudinary.v2.uploader.upload(dataURI);
+    return res.url;
+  });
+
+  const imageUrls = await Promise.all(uploadPromises);
+  return imageUrls;
+}
 
 export default router;

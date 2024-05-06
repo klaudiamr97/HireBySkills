@@ -9,6 +9,8 @@ const jobListingSchema = new mongoose.Schema<JobListingType>({
   essentialSkills: [{ type: String, required: true }],
   optionalSkills: [{ type: String, required: true }],
   description: { type: String, required: true },
+  imageUrls: [{ type: String, required: false }],
+  lastUpdated: { type: Date, required: true },
 });
 
 const JobListing = mongoose.model<JobListingType>(

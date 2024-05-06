@@ -7,13 +7,6 @@ export type JobListingType = {
   essentialSkills: string[];
   optionalSkills: string[];
   description: string;
-};
-
-
-export type UserType = {
-  _id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
+  imageUrls: string[];
+  lastUpdated: Date;
 };

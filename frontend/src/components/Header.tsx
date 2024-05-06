@@ -35,7 +35,7 @@ const Header = () => {
             {isLoggedIn ? (
               <>
                 <Link
-                  to="/candidateaccount"
+                  to="/employeraccount"
                   className="items-center py-3  px-7  w-full text-offwhite font-medium border border-black-tint rounded-xl focus:ring focus:ring-black-tint bg-black-tint hover:bg-body hover:text-black-tint transition ease-in-out duration-200"
                 >
                   Account

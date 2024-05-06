@@ -24,6 +24,13 @@ const OptionalTypeSection = () => {
     }
   };
 
+  const handleSkillRemove = (index: number) => {
+    const updatedSkills = [...selectedSkills];
+    updatedSkills.splice(index, 1);
+    setSelectedSkills(updatedSkills);
+    setValue("optionalSkills", updatedSkills);
+  };
+
   return (
     <section className="bg-body w-full overflow-hidden">
       <div className="container px-4 mx-auto">
@@ -50,7 +57,8 @@ const OptionalTypeSection = () => {
               {selectedSkills.map((skill, index) => (
                 <div
                   key={index}
-                  className="bg-purple px-3 py-1 rounded text-offwhite"
+                  className="bg-purple px-3 py-1 rounded text-offwhite cursor-pointer"
+                  onClick={() => handleSkillRemove(index)}
                 >
                   {skill}
                 </div>

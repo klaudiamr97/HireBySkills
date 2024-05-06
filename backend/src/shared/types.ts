@@ -10,3 +10,11 @@ export type JobListingType = {
   imageUrls: string[];
   lastUpdated: Date;
 };
+
+export type UserType = {
+  _id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};

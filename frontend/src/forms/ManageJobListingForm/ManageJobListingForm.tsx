@@ -19,7 +19,7 @@ type Props = {
 
 const ManageJobListingForm = ({ onSave, isLoading }: Props) => {
   const formMethods = useForm<JobListingFormData>();
-  const { handleSubmit } = formMethods;
+  const { handleSubmit, reset } = formMethods;
 
   const onSubmit = handleSubmit((formDataJson: JobListingFormData) => {
     console.log("Essential Skills:", formDataJson.essentialSkills);
@@ -40,6 +40,8 @@ const ManageJobListingForm = ({ onSave, isLoading }: Props) => {
       formData.append(`optionalSkills[${index}]`, optionalSkill);
     });
     onSave(formData);
+
+    reset();
   });
   return (
     <div className=" bg-body w-screen ">

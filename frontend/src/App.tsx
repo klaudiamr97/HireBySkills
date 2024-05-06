@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import EmployerAccount from "./pages/EmployerAccount";
+// import EmployerAccount from "./pages/EmployerAccount";
 import CandidateAccount from "./pages/CandidateAccount";
 import JobListing from "./pages/JobListing";
 import About from "./pages/About";
@@ -16,6 +16,7 @@ import MyJobs from "./pages/MyJobs";
 import LogIn from "./pages/LogIn";
 import AddJobListing from "./pages/AddJobListing";
 import useAppContext from "./contexts/useAppContext";
+import MyJobListings from "./pages/MyJobListings";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -29,12 +30,13 @@ const App = () => {
         <Route path="/joblisting" element={<JobListing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/add-job-listing" element={<AddJobListing />} />
         {isLoggedIn && (
           <>
+            <Route path="/add-job-listing" element={<AddJobListing />} />
             <Route path="/myjobs" element={<MyJobs />} />
-            <Route path="/employeraccount" element={<EmployerAccount />} />
+            {/* <Route path="/employeraccount" element={<EmployerAccount />} /> */}
             <Route path="/candidateaccount" element={<CandidateAccount />} />
+            <Route path="/employeraccount" element={<MyJobListings />} />
           </>
         )}
         <Route path="*" element={<Navigate to="/" />} />

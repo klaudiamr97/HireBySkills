@@ -24,6 +24,13 @@ const EssentialTypeSection = () => {
     }
   };
 
+  const handleSkillRemove = (index: number) => {
+    const updatedSkills = [...selectedSkills];
+    updatedSkills.splice(index, 1);
+    setSelectedSkills(updatedSkills);
+    setValue("essentialSkills", updatedSkills);
+  };
+
   return (
     <section className="bg-body w-full overflow-hidden">
       <div className="container px-4 mx-auto">
@@ -50,7 +57,8 @@ const EssentialTypeSection = () => {
               {selectedSkills.map((skill, index) => (
                 <div
                   key={index}
-                  className="bg-purple px-3 py-1 rounded text-offwhite"
+                  className="bg-purple px-3 py-1 rounded text-offwhite cursor-pointer"
+                  onClick={() => handleSkillRemove(index)}
                 >
                   {skill}
                 </div>
@@ -64,62 +72,3 @@ const EssentialTypeSection = () => {
 };
 
 export default EssentialTypeSection;
-// import React, { useState, useEffect } from "react";
-// import { useFormContext } from "react-hook-form";
-// import { skillsList } from "../../config/skills-options-config";
-// import { JobListingFormData } from "./ManageJobListingForm";
-
-// const EssentialTypeSection = () => {
-//   const { register } = useFormContext<JobListingFormData>();
-
-//   const [inputValue, setInputValue] = useState<string>("");
-
-//   useEffect(() => {
-//     console.log("Input Value:", inputValue); // Log inputValue
-
-//     // Split inputValue by commas and remove empty strings
-//     const skillsArray = inputValue
-//       .split(",")
-//       .map((skill) => skill.trim())
-//       .filter((skill) => skill !== "");
-
-//     console.log("Skills Array:", skillsArray); // Log skillsArray
-
-//     // Register essentialSkills with the updated skillsArray
-//     register("essentialSkills", { required: true, value: skillsArray });
-
-//     // Update skillsList array with the skills entered by the user
-//     skillsArray.forEach((skill) => {
-//       if (!skillsList.includes(skill)) {
-//         skillsList.push(skill);
-//       }
-//     });
-
-//     console.log("Essential Skills Registered:", skillsArray); // Log registered essentialSkills
-//   }, [register, inputValue]);
-
-//   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     setInputValue(event.target.value);
-//   };
-
-//   return (
-//     <section className="bg-body w-full overflow-hidden">
-//       <div className="container px-4 mx-auto">
-//         <div className="mb-5">
-//           <label className="block mb-5">Essential Skills</label>
-//           <div className="flex mb-4">
-//             <input
-//               type="text"
-//               value={inputValue}
-//               onChange={handleInputChange}
-//               className="border border-gray-300 rounded px-3 py-1"
-//               placeholder="Enter essential skills separated by commas"
-//             />
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default EssentialTypeSection;

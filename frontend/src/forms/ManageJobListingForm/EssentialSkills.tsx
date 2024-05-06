@@ -9,7 +9,7 @@ const EssentialTypeSection = () => {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
   useEffect(() => {
-    selectedSkills.forEach((skill, index) => {
+    selectedSkills.forEach((_skill, index) => {
       register(`essentialSkills.${index}` as const);
     });
   }, [register, selectedSkills]);

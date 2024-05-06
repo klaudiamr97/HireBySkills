@@ -9,7 +9,7 @@ const OptionalTypeSection = () => {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
   useEffect(() => {
-    selectedSkills.forEach((skill, index) => {
+    selectedSkills.forEach((_skill, index) => {
       register(`optionalSkills.${index}` as const);
     });
   }, [register, selectedSkills]);

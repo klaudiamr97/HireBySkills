@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import JoinUs from "../assets/man-with-join-us-sign-for-open-recruitment.png";
+import SearchBar from "../components/SearchBar";
 
 const JobSearch = () => {
   const [jobListings, setJobListings] = useState([
@@ -90,6 +91,7 @@ const JobSearch = () => {
       />
       <section className="py-10 bg-body">
         <div className="container mx-auto px-4">
+          <SearchBar />
           <div className="py-16 px-8 bg-white rounded-3xl flex flex-wrap">
             <div className="w-full md:w-1/4">
               <h2 className="font-heading text-4xl text-gray-900 font-black tracking-tight">

@@ -19,3 +19,12 @@ export type UserType = {
   firstName: string;
   lastName: string;
 };
+
+export type JobListingSearchResponse = {
+  data: JobListingType[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  };
+};

@@ -18,6 +18,7 @@ import AddJobListing from "./pages/AddJobListing";
 import useAppContext from "./contexts/useAppContext";
 import MyJobListings from "./pages/MyJobListings";
 import EditJobListing from "./pages/EditJobListing";
+import Search from "./pages/Search";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/aboutus" element={<About />} />
         <Route path="/jobs" element={<JobSearch />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/careerguide" element={<CareerGuide />} />
         <Route path="/joblisting" element={<JobListing />} />
         <Route path="/register" element={<Register />} />

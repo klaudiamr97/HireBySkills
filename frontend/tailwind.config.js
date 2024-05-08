@@ -11,6 +11,7 @@ export default {
       "black-tint": "#212529",
       red: "#f03e3e",
       white: "#ffffff",
+      graphite: "#41424C",
     },
     extend: {},
   },

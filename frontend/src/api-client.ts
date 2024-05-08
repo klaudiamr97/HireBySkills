@@ -1,6 +1,6 @@
 import { LogInFormData } from "./pages/LogIn";
 import { RegisterFormData } from "./pages/Register";
-import { JobListingType } from "../../backend/src/shared/types";
+import { JobListingSearchResponse, JobListingType } from "../../backend/src/shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -109,5 +109,26 @@ export const updateMyJobListingById = async (JobListingFormData: FormData) => {
     throw new Error("Failed to update job listing");
   }
 
+  return response.json();
+};
+
+export type SearchParams = {
+  company?: string;
+  location?: string;
+  page?: string;
+};
+
+export const searchJobListing = async (searchParams: SearchParams): Promise<JobListingSearchResponse> => {
+  const queryParams = new URLSearchParams();
+  queryParams.append("company", searchParams.company || "");
+  queryParams.append("location", searchParams.location || "");
+  queryParams.append("page", searchParams.page || "");
+
+  const response = await fetch(
+    `${API_BASE_URL}/api/joblistings/search?${queryParams}`
+  );
+  if (!response.ok) {
+    throw new Error("Error fetching job listings");
+  }
   return response.json();
 };

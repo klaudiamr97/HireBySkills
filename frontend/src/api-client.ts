@@ -1,6 +1,9 @@
 import { LogInFormData } from "./pages/LogIn";
 import { RegisterFormData } from "./pages/Register";
-import { JobListingSearchResponse, JobListingType } from "../../backend/src/shared/types";
+import {
+  JobListingSearchResponse,
+  JobListingType,
+} from "../../backend/src/shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -116,14 +119,25 @@ export type SearchParams = {
   company?: string;
   location?: string;
   page?: string;
+  essentialSkills?: string[];
+  optionalSkills?: string[];
 };
 
-export const searchJobListing = async (searchParams: SearchParams): Promise<JobListingSearchResponse> => {
+export const searchJobListing = async (
+  searchParams: SearchParams
+): Promise<JobListingSearchResponse> => {
   const queryParams = new URLSearchParams();
   queryParams.append("company", searchParams.company || "");
   queryParams.append("location", searchParams.location || "");
   queryParams.append("page", searchParams.page || "");
 
+  searchParams.essentialSkills?.forEach((essentialSkill) =>
+    queryParams.append("essentialSkills", essentialSkill)
+  );
+
+  searchParams.optionalSkills?.forEach((optionalSkill) =>
+    queryParams.append("optionalSkills", optionalSkill)
+  );
   const response = await fetch(
     `${API_BASE_URL}/api/joblistings/search?${queryParams}`
   );

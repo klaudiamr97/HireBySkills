@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/search", async (req: Request, res: Response) => {
   try {
     const query = constructSearchQuery(req.query);
+
     const pageSize = 5;
     const pageNumber = parseInt(
       req.query.page ? req.query.page.toString() : "1"
@@ -33,15 +34,34 @@ router.get("/search", async (req: Request, res: Response) => {
 const constructSearchQuery = (queryParams: {
   company?: string;
   location?: string;
+  essentialSkills?: string[];
+  optionalSkills?: string[];
 }) => {
   let constructedQuery: any = {};
 
   if (queryParams.company) {
-    constructedQuery.company = new RegExp(queryParams.company, "i");
+    constructedQuery.$or = constructedQuery.company = new RegExp(
+      queryParams.company,
+      "i"
+    );
   }
 
   if (queryParams.location) {
     constructedQuery.location = new RegExp(queryParams.location, "i");
+  }
+  if (queryParams.essentialSkills) {
+    constructedQuery.essentialSkills = {
+      $all: Array.isArray(queryParams.essentialSkills)
+        ? queryParams.essentialSkills
+        : [queryParams.essentialSkills],
+    };
+  }
+  if (queryParams.optionalSkills) {
+    constructedQuery.optionalSkills = {
+      $all: Array.isArray(queryParams.optionalSkills)
+        ? queryParams.optionalSkills
+        : [queryParams.optionalSkills],
+    };
   }
 
   return constructedQuery;

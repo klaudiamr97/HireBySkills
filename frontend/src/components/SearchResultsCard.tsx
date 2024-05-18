@@ -10,7 +10,7 @@ const SearchResultsCard = ({ listing }: Props) => {
     <div className="flex flex-col justify-between m-5 p-10 gap-4 bg-body rounded-3xl">
       <div>
         <Link
-          to={`/detail/${listing._id}`}
+          to={`/joblistings/${listing._id}`}
           className="font-heading text-2xl text-gray-900 font-black mb-2 cursor-pointer"
         >
           {listing.jobTitle} at {listing.company}
@@ -62,7 +62,7 @@ const SearchResultsCard = ({ listing }: Props) => {
           <div className="line-clamp-4 mb-6">{listing.description}</div>
         </div>
         <Link
-          to={`/detail/${listing._id}`}
+          to={`/joblistings/${listing._id}`}
           className="mx-auto text-sm bg-purple text-white rounded-lg p-2 font-semibold text-center hover:bg-dark-purple w-auto px-10"
         >
           View More Details

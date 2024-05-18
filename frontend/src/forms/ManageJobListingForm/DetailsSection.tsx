@@ -30,7 +30,7 @@ const JobListingDetailsSection = () => {
           </label>
         </div>
         <div className="flex gap-4">
-        <label className="block mb-5">
+          <label className="block mb-5">
             Company
             <div className="flex">
               <input

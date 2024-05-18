@@ -22,22 +22,26 @@ type Props = {
 };
 
 const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
-  console.log("Listing in ManageJobListingForm:", listing);
-  const formMethods = useForm<JobListingFormData>();
+  const formMethods = useForm<JobListingFormData>({
+    defaultValues: {
+      jobTitle: "",
+      company: "",
+      location: "",
+      salary: 0,
+      essentialSkills: [],
+      optionalSkills: [],
+      description: "",
+    },
+  });
   const { handleSubmit, reset } = formMethods;
 
   useEffect(() => {
-    reset(listing);
+    if (listing) {
+      reset(listing);
+    }
   }, [listing, reset]);
 
   const onSubmit = handleSubmit((formDataJson: JobListingFormData) => {
-    console.log("Essential Skills:", formDataJson.essentialSkills);
-    console.log("Optional Skills:", formDataJson.optionalSkills);
-    console.log("Job Title:", formDataJson.jobTitle);
-    console.log("Salary:", formDataJson.salary);
-    console.log("Location:", formDataJson.location);
-    console.log("Company:", formDataJson.company);
-
     const formData = new FormData();
     if (listing) {
       formData.append("listingId", listing._id);
@@ -53,30 +57,29 @@ const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
     formDataJson.optionalSkills.forEach((optionalSkill, index) => {
       formData.append(`optionalSkills[${index}]`, optionalSkill);
     });
+
     onSave(formData);
+    reset(); // Reset the form to initial state after submission
   });
+
   return (
-    <div className=" bg-body w-screen ">
-      <section className=" flex flex-grow">
-        <div className="container mx-auto px-4 ">
+    <div className="bg-body w-screen">
+      <section className="flex flex-grow">
+        <div className="container mx-auto px-4">
           <FormProvider {...formMethods}>
-            <form className="flex flex-col " onSubmit={onSubmit}>
+            <form className="flex flex-col" onSubmit={onSubmit}>
               <DetailsSection />
-              {listing && (
-                <>
-                  <EssentialTypeSection
-                    essentialSkills={listing.essentialSkills}
-                  />
-                  <OptionalTypeSection
-                    optionalSkills={listing.optionalSkills}
-                  />
-                </>
-              )}
+              <EssentialTypeSection
+                essentialSkills={listing ? listing.essentialSkills : []}
+              />
+              <OptionalTypeSection
+                optionalSkills={listing ? listing.optionalSkills : []}
+              />
               <div className="flex justify-end">
                 <button
                   disabled={isLoading}
                   type="submit"
-                  className="py-3 px-7  text-offwhite font-medium border border-purple rounded-xl focus:ring focus:ring-purple bg-purple hover:bg-dark-purple transition ease-in-out duration-200 disabled:bg-dark-purple"
+                  className="py-3 px-7 text-offwhite font-medium border border-purple rounded-xl focus:ring focus:ring-purple bg-purple hover:bg-dark-purple transition ease-in-out duration-200 disabled:bg-dark-purple"
                 >
                   {isLoading ? "Saving..." : "Save"}
                 </button>

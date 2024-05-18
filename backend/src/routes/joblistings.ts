@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import JobListing from "../models/joblisting";
 import { JobListingSearchResponse } from "../shared/types";
+import { param, validationResult } from "express-validator";
 
 const router = express.Router();
 
@@ -31,6 +32,26 @@ router.get("/search", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 });
+
+router.get(
+  "/:id",
+  [param("id").notEmpty().withMessage("Job listing ID is required")],
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const id = req.params.id.toString();
+    try {
+      const listing = await JobListing.findById(id);
+      res.json(listing);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error fetching job listing" });
+    }
+  }
+);
+
 const constructSearchQuery = (queryParams: {
   company?: string;
   location?: string;
@@ -40,10 +61,7 @@ const constructSearchQuery = (queryParams: {
   let constructedQuery: any = {};
 
   if (queryParams.company) {
-    constructedQuery.$or = constructedQuery.company = new RegExp(
-      queryParams.company,
-      "i"
-    );
+    constructedQuery.company = new RegExp(queryParams.company, "i");
   }
 
   if (queryParams.location) {

@@ -146,3 +146,19 @@ export const searchJobListing = async (
   }
   return response.json();
 };
+
+export const fetchListings = async (): Promise<JobListingType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/joblistings?`);
+  if (!response.ok) {
+    throw new Error("Error fetching job listings");
+  }
+  return response.json();
+};
+
+export const fetchJobListingById = async (listingId: string) => {
+  const response = await fetch(`${API_BASE_URL}/api/joblistings/${listingId}`);
+  if (!response.ok) {
+    throw new Error("Error fetching job listing");
+  }
+  return response.json();
+};

@@ -11,14 +11,14 @@ import CandidateAccount from "./pages/CandidateAccount";
 import JobListing from "./pages/JobListing";
 import About from "./pages/About";
 import CareerGuide from "./pages/CareerGuide";
-import JobSearch from "./pages/JobsSearch";
 import MyJobs from "./pages/MyJobs";
 import LogIn from "./pages/LogIn";
 import AddJobListing from "./pages/AddJobListing";
-import useAppContext from "./contexts/useAppContext";
+import {useAppContext} from "./contexts/AppContext";
 import MyJobListings from "./pages/MyJobListings";
 import EditJobListing from "./pages/EditJobListing";
 import Search from "./pages/Search";
+// import ApplicationSubmitted from "./pages/ApplicationSubmitted";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -27,10 +27,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutus" element={<About />} />
-        <Route path="/jobs" element={<JobSearch />} />
         <Route path="/search" element={<Search />} />
         <Route path="/careerguide" element={<CareerGuide />} />
-        <Route path="/joblisting" element={<JobListing />} />
+        <Route path="/joblistings/:listingId" element={<JobListing />} />
+        {/* <Route path="/joblistings/:listingId/application" element={<ApplicationSubmitted />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
         {isLoggedIn && (

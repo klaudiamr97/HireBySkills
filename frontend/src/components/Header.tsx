@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import LogOutButton from "./LogOutButton";
-import useAppContext from "../contexts/useAppContext";
+import {useAppContext} from "../contexts/AppContext";
 
 const Header = () => {
   const { isLoggedIn } = useAppContext();
@@ -20,7 +20,7 @@ const Header = () => {
           <div className="w-auto hidden lg:block">
             <ul className="flex items-center mr-16 text-black-font">
               <li className="mr-9 font-medium hover:text-dark-purple">
-                <a href="/jobs">Jobs</a>
+                <a href="/search">Jobs</a>
               </li>
               <li className="mr-9 font-medium hover:text-dark-purple">
                 <a href="/careerguide">Career Guide</a>

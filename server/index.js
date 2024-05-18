@@ -4,17 +4,20 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import postRoutes from "./routes/posts.js";
+import jobApplicationRoutes from "./routes/jobApplications.js"; // Ensure this path is correct
 
 const app = express();
 
-app.use("/posts", postRoutes);
+// Increase the body parser limits to handle larger payloads
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-const CONNECTION_URL =
-  "mongodb+srv://hirebyskills:Honeymoon22@cluster0.n8qhu6i.mongodb.net/?retryWrites=true&w=majority";
+app.use("/posts", postRoutes);
+app.use("/api/joblistings", jobApplicationRoutes); // Adjust the path as necessary
+
+const CONNECTION_URL = "your-mongodb-connection-string";
 
 const PORT = process.env.PORT || 5000;
 

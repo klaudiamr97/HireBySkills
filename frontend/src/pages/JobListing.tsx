@@ -1,84 +1,86 @@
-import React from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import * as apiClient from "./../api-client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import CandidateInfoForm from "../forms/UserInfoForm/CandidateInfoForm";
 
-interface SkillItemProps {
-  text: string;
-}
+const JobListing = () => {
+  const { listingId } = useParams();
 
-const SkillItem: React.FC<SkillItemProps> = ({ text }) => (
-  <p className="mb-6 appearance-none px-4 py-3.5 w-full text-gray-400 font-medium placeholder-gray-400 bg-offwhite outline-none">
-    {text}
-  </p>
-);
-
-interface SkillsSectionProps {
-  title: string;
-}
-
-const SkillsSection: React.FC<SkillsSectionProps> = ({ title }) => (
-  <div className="container bg-white pb-12 rounded-xl">
-    <h4 className="my-10 mx-11 pt-6 text-3xl font-bold font-heading leading-snug">
-      {title}
-    </h4>
-    <div className="flex flex-wrap mx-6 -mb-4 md:mb-0">
-      {[...Array(3)].map((_, index) => (
-        <div key={index} className="container md:w-2/6 p-6 bg-white">
-          <SkillItem text="Skill" />
-          <SkillItem text="Skill" />
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-const JobListing: React.FC = () => {
+  const { data: listing } = useQuery(
+    "fetchJobListingById",
+    () => apiClient.fetchJobListingById(listingId || ""),
+    {
+      enabled: !!listingId,
+    }
+  );
+  if (!listing) {
+    return <></>;
+  }
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-body overflow-hidden">
       <Header />
-      <section className="pt-28 pb-40 bg-body overflow-hidden">
-        <div className="container px-4 mx-auto">
-          <h4 className="mb-10 text-3xl xl:text-10xl font-bold font-heading tracking-px-n leading-none">
-            [Job title]
-          </h4>
-          <p>[Company]</p>
-          <p>[Location]</p>
-          <p>[Salary]</p>
-
-          <SkillsSection title="Essential Skills" />
-          <SkillsSection title="Optional Skills" />
-
-          <div className="container bg-white pb-12 rounded-xl">
-            <h4 className="my-10 mx-11 pt-6 text-3xl font-bold font-heading leading-snug">
-              Description
-            </h4>
-            <div className="flex flex-wrap mx-6 -mb-4 md:mb-0">
-              <p className="mx-5 mb-6 appearance-none px-4 py-3.5 w-full text-gray-400 placeholder-gray-400 bg-offwhite outline-none">
-                {[...Array(4)].map((_, index) => (
-                  <React.Fragment key={index}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Possimus placeat mollitia quod inventore odio. Vel
-                    reprehenderit vitae distinctio cum eaque sunt veniam
-                    repudiandae! Magnam quas aut similique! Consequuntur,
-                    dolorem aperiam.
-                    <br />
-                  </React.Fragment>
-                ))}
+      <main className="flex-grow">
+        <section className="pt-28">
+          <div className="container px-4 mx-auto p-8 rounded-xl">
+            <h2 className="mb-4 text-3xl font-bold font-heading tracking-px-n leading-none">
+              {listing.jobTitle}
+            </h2>
+            <div className="mb-6">
+              <p className="text-lg text-gray-700 font-medium">
+                {listing.company}
               </p>
+              <p className="text-lg text-gray-600">{listing.location}</p>
+              <p className="text-lg text-gray-600">£{listing.salary}</p>
+            </div>
+
+            <h3 className="mt-10 mb-4 text-xl font-bold font-heading tracking-px-n leading-none">
+              Essential Skills
+            </h3>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {listing.essentialSkills.map((essentialSkill: string) => (
+                <div
+                  key={essentialSkill}
+                  className="bg-purple px-3 py-2 rounded text-offwhite cursor-pointer"
+                >
+                  {essentialSkill}
+                </div>
+              ))}
+            </div>
+
+            <h3 className="mt-10 mb-4 text-xl font-bold font-heading tracking-px-n leading-none">
+              Optional Skills
+            </h3>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {listing.optionalSkills.map((optionalSkill: string) => (
+                <div
+                  key={optionalSkill}
+                  className="bg-purple px-3 py-2 rounded text-offwhite cursor-pointer"
+                >
+                  {optionalSkill}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex gap-8">
+              <div className="w-2/3 bg-white pb-12 rounded-xl">
+                <h4 className="my-10 mx-11 pt-6 text-3xl font-bold font-heading leading-snug">
+                  Description
+                </h4>
+                <div className="mx-6 -mb-4 md:mb-0">
+                  <p className="mx-5 mb-6 px-4 py-3.5 text-gray-400 bg-offwhite rounded-lg whitespace-pre-line">
+                    {listing.description}
+                  </p>
+                </div>
+              </div>
+              <div className="w-1/3">
+                <CandidateInfoForm listingId={listing._id} />
+              </div>
             </div>
           </div>
-
-          <span className="inline-flex my-10 float-right">
-            <Link
-              to="/sign-in"
-              className="flex items-center py-3 px-9 w-full text-offwhite font-medium border border-purple rounded-xl focus:ring focus:ring-purple bg-purple hover:bg-dark-purple transition ease-in-out duration-200"
-            >
-              Apply
-            </Link>
-          </span>
-        </div>
-      </section>
+        </section>
+      </main>
       <Footer />
     </div>
   );

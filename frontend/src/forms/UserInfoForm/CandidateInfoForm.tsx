@@ -33,7 +33,6 @@ const CandidateInfoForm = ({ listingId }: Props) => {
   );
 
   const {
-    watch,
     register,
     handleSubmit,
     setValue,

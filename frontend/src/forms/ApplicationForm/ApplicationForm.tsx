@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { UserType } from "../../../../backend/src/shared/types";
 import * as apiClient from "../../api-client";
 import { useNavigate, useParams } from "react-router-dom";

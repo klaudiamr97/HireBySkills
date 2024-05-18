@@ -14,10 +14,11 @@ import CareerGuide from "./pages/CareerGuide";
 import MyJobs from "./pages/MyJobs";
 import LogIn from "./pages/LogIn";
 import AddJobListing from "./pages/AddJobListing";
-import {useAppContext} from "./contexts/AppContext";
-import MyJobListings from "./pages/MyJobListings";
+import { useAppContext } from "./contexts/AppContext";
 import EditJobListing from "./pages/EditJobListing";
 import Search from "./pages/Search";
+import JobApplication from "./pages/JobApplication";
+import MyAccount from "./pages/MyAccount";
 // import ApplicationSubmitted from "./pages/ApplicationSubmitted";
 
 const App = () => {
@@ -30,16 +31,19 @@ const App = () => {
         <Route path="/search" element={<Search />} />
         <Route path="/careerguide" element={<CareerGuide />} />
         <Route path="/joblistings/:listingId" element={<JobListing />} />
-        {/* <Route path="/joblistings/:listingId/application" element={<ApplicationSubmitted />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
         {isLoggedIn && (
           <>
             <Route path="/add-job-listing" element={<AddJobListing />} />
             <Route path="/myjobs" element={<MyJobs />} />
-            {/* <Route path="/employeraccount" element={<EmployerAccount />} /> */}
+            <Route
+              path="/joblistings/:listingId/application"
+              element={<JobApplication />}
+            />
+
             <Route path="/candidateaccount" element={<CandidateAccount />} />
-            <Route path="/employeraccount" element={<MyJobListings />} />
+            <Route path="/my-account" element={<MyAccount />} />
             <Route
               path="/edit-job-listing/:listingId"
               element={<EditJobListing />}

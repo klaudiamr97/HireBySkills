@@ -6,7 +6,7 @@ import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 
-router.get("/me", verifyToken, async (req: Request, res: Response) => {
+router.get("/myaccount", verifyToken, async (req: Request, res: Response) => {
   const userId = req.userId;
 
   try {
@@ -71,4 +71,3 @@ router.post(
 );
 
 export default router;
-

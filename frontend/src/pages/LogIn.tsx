@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export type LogInFormData = {
   email: string;
@@ -13,6 +13,7 @@ export type LogInFormData = {
 const LogIn = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const location = useLocation();
   const {
     register,
     formState: { errors },
@@ -20,9 +21,9 @@ const LogIn = () => {
   } = useForm<LogInFormData>();
   const mutation = useMutation(apiClient.logIn, {
     onSuccess: async () => {
-      console.log("user has been logged in");
+      console.log("User has been logged in");
       await queryClient.invalidateQueries("validateToken");
-      navigate("/");
+      navigate(location.state?.from?.pathname || "/");
     },
     onError: (error: Error) => {
       console.log("Log in failed", error.message);

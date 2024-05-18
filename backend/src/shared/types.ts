@@ -10,6 +10,7 @@ export type JobListingType = {
   description: string;
   imageUrls: string[];
   lastUpdated: Date;
+  applications: ApplicationType[];
 };
 
 export type UserType = {
@@ -27,4 +28,27 @@ export type JobListingSearchResponse = {
     page: number;
     pages: number;
   };
+};
+export type ApplicationFormData = {
+  listingId: string;
+  jobTitle: string;
+  company: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  cv: string;
+  cvName: string;
+  coverLetter?: string;
+};
+
+export type ApplicationType = {
+  _id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  cv: string;
+  cvName: string;
+  coverLetter?: string;
+  coverLetterName?: string;
 };

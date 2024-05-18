@@ -1,11 +1,23 @@
 import { LogInFormData } from "./pages/LogIn";
 import { RegisterFormData } from "./pages/Register";
 import {
+  ApplicationFormData,
   JobListingSearchResponse,
   JobListingType,
+  UserType,
 } from "../../backend/src/shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
+export const fetchCurrentUser = async (): Promise<UserType> => {
+  const response = await fetch(`${API_BASE_URL}/api/users/myaccount`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Error fetching user");
+  }
+  return response.json();
+};
 
 export const register = async (formData: RegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
@@ -160,5 +172,35 @@ export const fetchJobListingById = async (listingId: string) => {
   if (!response.ok) {
     throw new Error("Error fetching job listing");
   }
+  return response.json();
+};
+
+export const submitApplication = async (formData: ApplicationFormData) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/joblistings/${formData.listingId}/applications`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Error submitting application");
+  }
+};
+
+export const fetchMyApplications = async (): Promise<JobListingType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-applications`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Unable to fetch applications");
+  }
+
   return response.json();
 };

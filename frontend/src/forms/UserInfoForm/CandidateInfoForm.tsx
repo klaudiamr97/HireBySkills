@@ -1,7 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
+import * as apiClient from "../../api-client";
 
 type Props = {
   listingId: string;
@@ -9,23 +12,31 @@ type Props = {
 
 type CandidateInfoFormData = {
   listingId: string;
-  name: string;
-  surname: string;
+  firstName: string;
+  lastName: string;
   location: string;
   email: string;
-  cv: FileList; // Changed to FileList to handle file input
 };
 
 const CandidateInfoForm = ({ listingId }: Props) => {
   const search = useSearchContext();
   const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
+  const locationURL = useLocation();
+
+  const { data: currentUser, isSuccess } = useQuery(
+    "fetchCurrentUser",
+    apiClient.fetchCurrentUser,
+    {
+      enabled: isLoggedIn,
+    }
+  );
 
   const {
     watch,
     register,
     handleSubmit,
-
+    setValue,
     formState: { errors },
   } = useForm<CandidateInfoFormData>({
     defaultValues: {
@@ -33,42 +44,62 @@ const CandidateInfoForm = ({ listingId }: Props) => {
     },
   });
 
-  const location = watch("location");
+  useEffect(() => {
+    if (isSuccess && currentUser) {
+      setValue("firstName", currentUser.firstName);
+      setValue("lastName", currentUser.lastName);
+      setValue("email", currentUser.email);
+    }
+  }, [isSuccess, currentUser, setValue]);
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("candidateInfoFormData");
+    if (savedData) {
+      const formData = JSON.parse(savedData) as Omit<
+        CandidateInfoFormData,
+        "listingId"
+      >;
+      for (const [key, value] of Object.entries(formData)) {
+        setValue(key as keyof CandidateInfoFormData, value);
+      }
+    }
+  }, [setValue]);
+
+  const saveFormDataToLocalStorage = (data: CandidateInfoFormData) => {
+    const { firstName, lastName, location, email } = data;
+    localStorage.setItem(
+      "candidateInfoFormData",
+      JSON.stringify({ firstName, lastName, location, email })
+    );
+  };
+
+  const clearFormDataFromLocalStorage = () => {
+    localStorage.removeItem("candidateInfoFormData");
+  };
 
   const onSignInClick: SubmitHandler<CandidateInfoFormData> = (data) => {
+    saveFormDataToLocalStorage(data);
     search.saveSearchValues("", data.location);
-    navigate("/login", { state: { from: location } });
+    navigate("/login", { state: { from: locationURL } });
   };
 
   const onSubmit: SubmitHandler<CandidateInfoFormData> = (data) => {
+    saveFormDataToLocalStorage(data);
     search.saveSearchValues("", data.location);
 
-    const file = data.cv[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      const cvBase64 = reader.result as string;
-      const formData = {
-        listingId: listingId,
-        name: data.name,
-        surname: data.surname,
-        email: data.email,
-        cv: cvBase64.split(",")[1], // Remove metadata prefix from Base64 string
-        cvName: file.name,
-      };
-
-      // Log formData to the console instead of submitting to an API
-      console.log("Form Data:", formData);
-
-      // Navigate to a success page or perform any other actions
-      navigate(`/joblistings/${listingId}/application`);
+    const formData = {
+      listingId: listingId,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
     };
 
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      console.error("No file selected");
-    }
+    // Log formData to the console instead of submitting to an API
+    console.log("Form Data:", formData);
+
+    // Navigate to a success page or perform any other actions
+    clearFormDataFromLocalStorage();
+    navigate(`/joblistings/${listingId}/application`);
   };
 
   return (
@@ -84,13 +115,13 @@ const CandidateInfoForm = ({ listingId }: Props) => {
             <input
               className="w-full text-black-tint p-1 focus:ring focus:ring-indigo-300 font-bold"
               type="text"
-              {...register("name", {
+              {...register("firstName", {
                 required: "This field is required",
               })}
             />
-            {errors.name && (
+            {errors.firstName && (
               <span className="text-red font-medium">
-                {errors.name.message}
+                {errors.firstName.message}
               </span>
             )}
           </label>
@@ -99,13 +130,13 @@ const CandidateInfoForm = ({ listingId }: Props) => {
             <input
               className="w-full p-1 text-black-tint focus:ring focus:ring-indigo-300 font-bold"
               type="text"
-              {...register("surname", {
+              {...register("lastName", {
                 required: "This field is required",
               })}
             />
-            {errors.surname && (
+            {errors.lastName && (
               <span className="text-red font-medium">
-                {errors.surname.message}
+                {errors.lastName.message}
               </span>
             )}
           </label>
@@ -124,20 +155,6 @@ const CandidateInfoForm = ({ listingId }: Props) => {
               </span>
             )}
           </label>
-          <label className="flex flex-col w-full">
-            CV Upload
-            <input
-              type="file"
-              accept=".pdf,.doc,.docx"
-              className="w-full p-1 focus:ring focus:ring-indigo-300 font-bold"
-              {...register("cv", {
-                required: "This field is required",
-              })}
-            />
-            {errors.cv && (
-              <span className="text-red font-medium">{errors.cv.message}</span>
-            )}
-          </label>
           <div className="flex justify-end">
             {isLoggedIn ? (
               <button
@@ -151,7 +168,7 @@ const CandidateInfoForm = ({ listingId }: Props) => {
                 type="submit"
                 className="py-3 px-9 text-offwhite font-medium border border-black-tint rounded-xl focus:ring focus:ring-black-tint bg-black-tint hover:bg-body hover:text-black-tint transition ease-in-out duration-200"
               >
-                Sign in to Apply
+                Log in to Apply
               </button>
             )}
           </div>

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -6,7 +7,6 @@ import JoinUs from "../assets/man-with-join-us-sign-for-open-recruitment.png";
 import SearchBar from "../components/SearchBar";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
-import { useState } from "react";
 import SearchResultsCard from "../components/SearchResultsCard";
 import Pagination from "../components/Pagination";
 import EssentialSkillsFilter from "../components/EssentialSkillsFilter";
@@ -22,6 +22,7 @@ const Search = () => {
   const [selectedOptionalSkills, setSelectedOptionalSkills] = useState<
     string[]
   >([]);
+  const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
 
   const searchParams = {
     company: search.company,
@@ -30,6 +31,7 @@ const Search = () => {
     essentialSkills: selectedEssentialSkills,
     optionalSkills: selectedOptionalSkills,
   };
+
   const { data: JobListingData } = useQuery(
     ["searchJobListings", searchParams],
     () => apiClient.searchJobListing(searchParams)
@@ -72,6 +74,11 @@ const Search = () => {
     updatedSkills.splice(index, 1);
     setSelectedOptionalSkills(updatedSkills);
   };
+
+  const toggleFilterVisibility = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+
   return (
     <div className="overflow-hidden">
       <Header />
@@ -84,8 +91,18 @@ const Search = () => {
       <section className="py-10 min-h-screen bg-body">
         <div className="container mx-auto px-4">
           <SearchBar />
+          <button
+            className="md:hidden border border-gray-300 rounded px-3 py-1 mb-4"
+            onClick={toggleFilterVisibility}
+          >
+            {isFilterVisible ? "Hide Filters" : "Show Filters"}
+          </button>
           <div className="flex flex-wrap">
-            <div className="md:w-1/4 p-5 sticky top-10 bg-white rounded-l-3xl">
+            <div
+              className={`md:w-1/4 p-5 sticky top-10 bg-white rounded-l-3xl ${
+                isFilterVisible ? "block" : "hidden"
+              } md:block`}
+            >
               <h3 className="font-heading text-lg text-gray-900 font-black tracking-tight border-b pb-5">
                 Filter by:
               </h3>

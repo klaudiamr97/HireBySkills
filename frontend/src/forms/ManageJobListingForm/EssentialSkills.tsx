@@ -10,22 +10,33 @@ type Props = {
 const EssentialTypeSection = ({ essentialSkills }: Props) => {
   const { register, setValue } = useFormContext<JobListingFormData>();
 
-  const [selectedSkills, setSelectedSkills] =
-    useState<string[]>(essentialSkills);
+  const [selectedSkills, setSelectedSkills] = useState<string[]>(() => {
+    const savedSkills = sessionStorage.getItem("selectedEssentialSkills");
+    return savedSkills ? JSON.parse(savedSkills) : essentialSkills;
+  });
 
   useEffect(() => {
-    setSelectedSkills(essentialSkills);
-    essentialSkills.forEach((_skill, index) => {
-      register(`essentialSkills.${index}` as const);
-    });
+    if (essentialSkills.length > 0) {
+      setSelectedSkills(essentialSkills);
+      essentialSkills.forEach((_skill, index) => {
+        register(`essentialSkills.${index}` as const);
+      });
+    }
   }, [essentialSkills, register]);
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      "selectedEssentialSkills",
+      JSON.stringify(selectedSkills)
+    );
+    setValue("essentialSkills", selectedSkills);
+  }, [selectedSkills, setValue]);
 
   const handleSkillSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSkill = event.target.value;
     if (!selectedSkills.includes(selectedSkill)) {
       const updatedSkills = [...selectedSkills, selectedSkill];
       setSelectedSkills(updatedSkills);
-      setValue("essentialSkills", updatedSkills);
     }
   };
 
@@ -33,8 +44,20 @@ const EssentialTypeSection = ({ essentialSkills }: Props) => {
     const updatedSkills = [...selectedSkills];
     updatedSkills.splice(index, 1);
     setSelectedSkills(updatedSkills);
-    setValue("essentialSkills", updatedSkills);
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem("selectedEssentialSkills");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      sessionStorage.removeItem("selectedEssentialSkills");
+    };
+  }, []);
 
   return (
     <section className="bg-body w-full overflow-hidden">

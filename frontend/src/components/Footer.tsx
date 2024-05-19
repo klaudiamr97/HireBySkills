@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-body py-10">
+    <footer className="bg-body py-10 overflow-hidden">
       <div className="container mx-auto">
         <div className="flex flex-wrap items-center justify-center -mb-5 lg:-mx-6">
           <span className="black-font font-bold tracking-tight flex gap-4 mb-5">
@@ -39,7 +39,6 @@ const Footer = () => {
               className="px-16 hover:text-dark-purple transition ease-in-out duration-200"
               href="/aboutus"
             >
-              {" "}
               <p>About Us</p>
             </a>
           </span>

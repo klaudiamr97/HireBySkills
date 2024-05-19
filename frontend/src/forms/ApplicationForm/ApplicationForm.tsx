@@ -16,13 +16,13 @@ export type ApplicationFormData = {
   lastName: string;
   email: string;
   cv: FileList;
-  coverLetter?: FileList; // Optional cover letter field
+  coverLetter?: FileList;
   jobTitle: string;
   company: string;
   location: string;
   listingId: string;
-  cvName: string; // Add cvName here
-  coverLetterName?: string; // Add coverLetterName here
+  cvName: string;
+  coverLetterName?: string;
 };
 
 const ApplicationForm = ({ currentUser }: Props) => {

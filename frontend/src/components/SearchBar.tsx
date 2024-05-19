@@ -18,7 +18,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="-mt-8 p-3 mb-5 bg-purple rounded-2xl shadow-md grid grid-cols-3 items-center gap-4"
+      className="mt-4 md:mt-0 p-3 mb-5 bg-purple rounded-2xl shadow-md grid grid-cols-1 md:grid-cols-3 items-center gap-2 md:gap-4"
     >
       <div className="flex rounded items-center bg-white p-2 w-full">
         <input
@@ -28,7 +28,7 @@ const SearchBar = () => {
           onChange={(event) => setCompany(event.target.value)}
         />
       </div>
-      <div className="flex rounded items-center bg-white p-2 w-full">
+      <div className="flex rounded items-center bg-white p-2 w-full mt-2 md:mt-0">
         <input
           placeholder="Choose a location"
           className="text-md w-full focus:outline-none"
@@ -36,7 +36,7 @@ const SearchBar = () => {
           onChange={(event) => setLocation(event.target.value)}
         />
       </div>
-      <div className="flex pl-5 pr-2 gap-4 w-full">
+      <div className="flex flex-col md:flex-row pl-5 pr-2 gap-2 md:gap-4 w-full mt-2 md:mt-0">
         <button className="bg-offwhite rounded text-blacktint h-full p-2 font-bold text-xl hover:bg-white w-full">
           Search
         </button>

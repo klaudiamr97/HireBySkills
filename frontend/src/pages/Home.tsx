@@ -11,26 +11,31 @@ import businessInterviewIcon from "../assets/business-interview1.png";
 import joinUsIcon from "../assets/man-with-join-us-sign-for-open-recruitment.png";
 
 const Home = () => {
-  const [careerGuideItems /*setCareerGuideItems*/] = useState([
+  const [careerGuideItems] = useState([
     {
       title: "Mastering the Art of Career Transitions: A Step-by-Step Guide",
       description:
-        "Navigate essential steps for a successful career transition.",
+        "Changing careers can be one of the most daunting yet rewarding decisions you'll ever make. Whether you're looking to find more satisfaction in your work, achieve better work-life balance, or align your job with your passions...",
+      link: "/careerguide/careertransition",
     },
     {
       title: "Top 10 Most In-Demand Skills for the Modern Job Market",
-      description: "Discover essential skills for today's job market.",
+      description:
+        "The job market is constantly evolving, and so are the skills that employers are seeking. To stay competitive and enhance your employability, it's essential to develop skills that are in high demand...",
+      link: "/careerguide/indemandskills",
     },
     {
       title: "Navigating Remote Work: Tips for Success in the Virtual Office",
-      description: "Guidance for thriving in a remote work environment.",
+      description:
+        "Remote work has become a new norm for many professionals. While it offers flexibility and eliminates commuting, it also comes with its own set of challenges. Here are some tips to help you succeed in the virtual office...",
+      link: "/careerguide/remoteworktips",
     },
   ]);
 
   const howItWorksItems = [
     {
       image: dataAnalysisIcon,
-      text: "Add your skills to your profile and upload your CV",
+      text: "Choose your skills from the list",
     },
     { image: laptopIcon, text: "Find a perfect match" },
     { image: girlWithLaptopIcon, text: "Apply" },
@@ -50,12 +55,12 @@ const Home = () => {
       />
       <section className="bg-white overflow-hidden">
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="md:w-1/2 flex flex-col">
-            <h4 className="p-8 text-3xl leading-normal xl:text-10xl font-bold font-heading tracking-px-n">
+          <div className="md:w-1/2 flex flex-col p-4">
+            <h4 className="text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
               Match your skills with job offers
             </h4>
           </div>
-          <div className="md:w-1/2 p-8">
+          <div className="md:w-1/2 p-4">
             <p>
               Use our "Match Your Skills with Job Offers" feature to simplify
               your job search. Input your skills, and our advanced algorithm
@@ -67,12 +72,12 @@ const Home = () => {
         </div>
 
         <div className="relative pb-10 z-10 px-4 mx-auto bg-body text-center">
-          <h4 className="py-16 text-6xl md:text-3xl font-bold font-heading tracking-px-n leading-tight">
+          <h4 className="py-16 text-3xl md:text-6xl font-bold font-heading tracking-px-n leading-tight">
             How It Works
           </h4>
           <div className="container mx-auto flex flex-wrap justify-center">
             {howItWorksItems.map((item, index) => (
-              <div key={index} className="w-full md:w-1/2 lg:w-1/5 p-8">
+              <div key={index} className="w-full md:w-1/2 lg:w-1/5 p-4">
                 <img
                   src={item.image}
                   alt={`how-it-works-icon-${index}`}
@@ -89,19 +94,27 @@ const Home = () => {
         </div>
 
         <div className="container pb-24 px-4 mx-auto">
-          <h4 className="py-16 text-6xl md:text-3xl text-center font-bold font-heading tracking-px-n leading-tight">
+          <h4 className="py-16 text-3xl md:text-6xl text-center font-bold font-heading tracking-px-n leading-tight">
             Career Guide
           </h4>
-          <div className="flex justify-between">
+          <div className="flex flex-wrap justify-between">
             {careerGuideItems.map((item, index) => (
-              <div key={index} className="w-full md:w-1/3 p-16 md:p-3">
-                <div className="bg-body h-96 mx-8 rounded-xl flex-grow relative">
+              <div key={index} className="w-full md:w-1/3 p-4">
+                <div className="bg-body h-96 mx-4 rounded-xl flex-grow relative">
                   <div className="absolute inset-4 bg-white rounded-xl p-6 flex flex-col justify-between">
                     <div>
                       <h5 className="text-lg font-bold pb-5">
-                        <a href="#">{item.title}</a>
+                        <a href={item.link}>{item.title}</a>
                       </h5>
                       <p>{item.description}</p>
+                    </div>
+                    <div className="pt-4 text-right">
+                      <a
+                        href={item.link}
+                        className="text-purple font-semibold hover:underline"
+                      >
+                        Read More
+                      </a>
                     </div>
                   </div>
                 </div>

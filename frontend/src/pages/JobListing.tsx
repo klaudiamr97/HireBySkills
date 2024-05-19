@@ -15,14 +15,16 @@ const JobListing = () => {
       enabled: !!listingId,
     }
   );
+
   if (!listing) {
     return <></>;
   }
+
   return (
     <div className="flex flex-col min-h-screen bg-body overflow-hidden">
       <Header />
       <main className="flex-grow">
-        <section className="pt-28">
+        <section className="pt-12">
           <div className="container px-4 mx-auto p-8 rounded-xl">
             <h2 className="mb-4 text-3xl font-bold font-heading tracking-px-n leading-none">
               {listing.jobTitle}
@@ -63,8 +65,8 @@ const JobListing = () => {
               ))}
             </div>
 
-            <div className="flex gap-8">
-              <div className="w-2/3 bg-white pb-12 rounded-xl">
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="md:w-2/3 bg-white pb-12 rounded-xl">
                 <h4 className="my-10 mx-11 pt-6 text-3xl font-bold font-heading leading-snug">
                   Description
                 </h4>
@@ -74,7 +76,7 @@ const JobListing = () => {
                   </p>
                 </div>
               </div>
-              <div className="w-1/3">
+              <div className="md:w-1/3">
                 <CandidateInfoForm listingId={listing._id} />
               </div>
             </div>

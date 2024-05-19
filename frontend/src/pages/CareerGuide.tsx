@@ -10,7 +10,7 @@ import DistanceWorking from "../assets/distance-learning.png";
 
 const CareerGuide = () => {
   return (
-    <div className=" overflow-hidden">
+    <div className="overflow-hidden">
       <Header />
       <Hero
         title="Read Our Expert Guides And Empower Your Career Journey "
@@ -20,23 +20,27 @@ const CareerGuide = () => {
       />
       <section className="bg-white">
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="w-full pr-40 md:w-1/2 flex flex-col">
-            <img src={CareerImg} alt="man-walking-up-the-stairs" />
+          <div className="w-full md:w-1/2 flex flex-col pr-0 md:pr-40 p-4">
+            <img
+              src={CareerImg}
+              alt="man-walking-up-the-stairs"
+              className="w-full md:w-auto"
+            />
           </div>
           <div className="md:w-1/2 p-8">
-            <h4 className="py-8 text-3xl leading-normal xl:text-10xl font-bold font-heading tracking-px-n">
+            <h4 className="py-8 text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
               Mastering the Art of Career Transitions: A Step-by-Step Guide
             </h4>
             <p>
-              Embarking on a career transition marks a transformative journey
-              that holds both excitement and challenges. This comprehensive
-              guide aims to be your compass, navigating you through the
-              essential steps needed to ensure a smooth and successful career
-              change...
+              Changing careers can be one of the most daunting yet rewarding
+              decisions you'll ever make. Whether you're looking to find more
+              satisfaction in your work, achieve better work-life balance, or
+              align your job with your passions, mastering the art of career
+              transitions is crucial...
             </p>
-            <span className="inline-flex my-10 float-left">
+            <span className="inline-flex my-10">
               <Link
-                to="#"
+                to="/careerguide/careertransition"
                 className="flex items-center py-3 px-8 text-black-tint font-medium border border-black-tint rounded-xl focus:ring focus:ring-black-tint bg-body hover:bg-black-tint hover:text-offwhite transition ease-in-out duration-200"
               >
                 Read More
@@ -48,47 +52,55 @@ const CareerGuide = () => {
       <section className="bg-body">
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="md:w-1/2 p-8">
-            <h4 className="py-8 text-3xl leading-normal xl:text-10xl font-bold font-heading tracking-px-n">
+            <h4 className="py-8 text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
               Top 10 Most In-Demand Skills for the Modern Job Market
             </h4>
             <p>
-              In our fast-paced job market, the pursuit of relevant skills has
-              become a cornerstone of professional success. This blog post
-              unveils the top 10 in-demand skills that employers seek in the
-              modern landscape...
+              The job market is constantly evolving, and so are the skills that
+              employers are seeking. To stay competitive and enhance your
+              employability, it's essential to develop skills that are in high
+              demand...
             </p>
-            <span className="inline-flex my-10 float-left">
+            <span className="inline-flex my-10">
               <Link
-                to="#"
+                to="/careerguide/indemandskills"
                 className="flex items-center py-3 px-8 text-black-tint font-medium border border-black-tint rounded-xl focus:ring focus:ring-black-tint bg-body hover:bg-black-tint hover:text-offwhite transition ease-in-out duration-200"
               >
                 Read More
               </Link>
             </span>
           </div>
-          <div className="w-full pl-40 md:w-1/2 flex flex-col">
-            <img src={SkillsImg} alt="man-walking-up-the-stairs" />
+          <div className="w-full md:w-1/2 flex flex-col pl-0 md:pl-40 p-4">
+            <img
+              src={SkillsImg}
+              alt="skills icon"
+              className="w-full md:w-auto"
+            />
           </div>
         </div>
       </section>
       <section className="bg-white overflow-hidden">
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="w-full pr-40 md:w-1/2 flex flex-col">
-            <img src={RemoteWorkImg} alt="man-walking-up-the-stairs" />
+          <div className="w-full md:w-1/2 flex flex-col pr-0 md:pr-40 p-4">
+            <img
+              src={RemoteWorkImg}
+              alt="remote work icon"
+              className="w-full md:w-auto"
+            />
           </div>
           <div className="md:w-1/2 p-8">
-            <h4 className="py-8 text-3xl leading-normal xl:text-10xl font-bold font-heading tracking-px-n">
+            <h4 className="py-8 text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
               Navigating Remote Work: Tips for Success in the Virtual Office
             </h4>
             <p>
-              The global shift toward remote work has redefined the professional
-              landscape. This blog post aims to equip you with practical tips
-              and insights to not only adapt but thrive in the virtual office
-              environment...
+              Remote work has become a new norm for many professionals. While it
+              offers flexibility and eliminates commuting, it also comes with
+              its own set of challenges. Here are some tips to help you succeed
+              in the virtual office...
             </p>
-            <span className="inline-flex my-10 float-left">
+            <span className="inline-flex my-10">
               <Link
-                to="#"
+                to="/careerguide/remoteworktips"
                 className="flex items-center py-3 px-8 text-black-tint font-medium border border-black-tint rounded-xl focus:ring focus:ring-black-tint bg-body hover:bg-black-tint hover:text-offwhite transition ease-in-out duration-200"
               >
                 Read More

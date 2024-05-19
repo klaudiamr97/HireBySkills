@@ -10,22 +10,33 @@ type Props = {
 const OptionalTypeSection = ({ optionalSkills }: Props) => {
   const { register, setValue } = useFormContext<JobListingFormData>();
 
-  const [selectedSkills, setSelectedSkills] =
-    useState<string[]>(optionalSkills);
+  const [selectedSkills, setSelectedSkills] = useState<string[]>(() => {
+    const savedSkills = sessionStorage.getItem("selectedOptionalSkills");
+    return savedSkills ? JSON.parse(savedSkills) : optionalSkills;
+  });
 
   useEffect(() => {
-    setSelectedSkills(optionalSkills);
-    optionalSkills.forEach((_skill, index) => {
-      register(`optionalSkills.${index}` as const);
-    });
+    if (optionalSkills.length > 0) {
+      setSelectedSkills(optionalSkills);
+      optionalSkills.forEach((_skill, index) => {
+        register(`optionalSkills.${index}` as const);
+      });
+    }
   }, [optionalSkills, register]);
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      "selectedOptionalSkills",
+      JSON.stringify(selectedSkills)
+    );
+    setValue("optionalSkills", selectedSkills);
+  }, [selectedSkills, setValue]);
 
   const handleSkillSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSkill = event.target.value;
     if (!selectedSkills.includes(selectedSkill)) {
       const updatedSkills = [...selectedSkills, selectedSkill];
       setSelectedSkills(updatedSkills);
-      setValue("optionalSkills", updatedSkills);
     }
   };
 
@@ -33,8 +44,20 @@ const OptionalTypeSection = ({ optionalSkills }: Props) => {
     const updatedSkills = [...selectedSkills];
     updatedSkills.splice(index, 1);
     setSelectedSkills(updatedSkills);
-    setValue("optionalSkills", updatedSkills);
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem("selectedOptionalSkills");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      sessionStorage.removeItem("selectedOptionalSkills");
+    };
+  }, []);
 
   return (
     <section className="bg-body w-full overflow-hidden">

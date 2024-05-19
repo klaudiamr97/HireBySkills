@@ -19,6 +19,9 @@ import EditJobListing from "./pages/EditJobListing";
 import Search from "./pages/Search";
 import JobApplication from "./pages/JobApplication";
 import MyAccount from "./pages/MyAccount";
+import CareerTransitionsPage from "./pages/CareerTransitionaPage";
+import InDemandSkillsPage from "./pages/InDemandSkillsPage";
+import RemoteWorkTipsPage from "./pages/RemoteWorkTipsPage";
 // import ApplicationSubmitted from "./pages/ApplicationSubmitted";
 
 const App = () => {
@@ -30,6 +33,18 @@ const App = () => {
         <Route path="/aboutus" element={<About />} />
         <Route path="/search" element={<Search />} />
         <Route path="/careerguide" element={<CareerGuide />} />
+        <Route
+          path="/careerguide/careertransition"
+          element={<CareerTransitionsPage />}
+        />
+        <Route
+          path="/careerguide/indemandskills"
+          element={<InDemandSkillsPage />}
+        />
+        <Route
+          path="/careerguide/remoteworktips"
+          element={<RemoteWorkTipsPage />}
+        />
         <Route path="/joblistings/:listingId" element={<JobListing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />

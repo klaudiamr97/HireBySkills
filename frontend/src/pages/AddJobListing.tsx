@@ -19,7 +19,7 @@ const AddJobListing = () => {
   return (
     <div className="overflow-hidden bg-body flex flex-col min-h-screen">
       <Header />
-      <div className="flex-grow">
+      <div className="flex-grow mb-5">
         <ManageJobListingForm onSave={handleSave} isLoading={isLoading} />
       </div>
       <Footer />

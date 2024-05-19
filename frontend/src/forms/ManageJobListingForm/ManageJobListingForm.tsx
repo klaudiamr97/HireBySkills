@@ -4,6 +4,7 @@ import EssentialTypeSection from "./EssentialSkills";
 import OptionalTypeSection from "./OptionalSkills";
 import { JobListingType } from "../../../../backend/src/shared/types";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export type JobListingFormData = {
   jobTitle: string;
@@ -22,6 +23,7 @@ type Props = {
 };
 
 const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
+  const navigate = useNavigate();
   const formMethods = useForm<JobListingFormData>({
     defaultValues: {
       jobTitle: "",
@@ -59,7 +61,8 @@ const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
     });
 
     onSave(formData);
-    reset(); // Reset the form to initial state after submission
+    navigate(`/my-account`);
+    reset();
   });
 
   return (

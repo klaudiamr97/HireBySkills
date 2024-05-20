@@ -72,7 +72,13 @@ const MyApplications = () => {
                     {application.coverLetterName && (
                       <div>
                         <span className="font-bold mr-2">Cover Letter: </span>
-                        <span>{application.coverLetterName}</span>
+                        <a
+                          href={`data:application/octet-stream;base64,${application.coverLetter}`}
+                          download={application.coverLetterName}
+                          className="text-blue-500 underline"
+                        >
+                          {application.coverLetterName}
+                        </a>
                       </div>
                     )}
                   </div>

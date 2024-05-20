@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
 interface HeroProps {
   title?: string;
@@ -15,6 +16,7 @@ const Hero: React.FC<HeroProps> = ({
   buttonLink,
   imgSrc,
 }) => {
+  const { isLoggedIn } = useAppContext();
   return (
     <div className="w-screen overflow-hidden flex items-center justify-between bg-body py-5">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-0">
@@ -29,7 +31,7 @@ const Hero: React.FC<HeroProps> = ({
               {description}
             </p>
           )}
-          {buttonText && buttonLink && (
+          {!isLoggedIn && buttonText && buttonLink && (
             <div className="w-full md:w-auto mb-8">
               <Link
                 to={buttonLink}

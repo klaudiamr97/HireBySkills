@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
 
 const Cta = () => {
+  const { isLoggedIn } = useAppContext();
+
+  if (isLoggedIn) {
+    return null;
+  }
+
   return (
     <div className="w-screen flex overflow-hidden items-center justify-between bg-body py-3">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4 sm:px-6 lg:px-8">

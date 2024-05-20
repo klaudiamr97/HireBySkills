@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   skillsList: string[];
@@ -13,9 +13,27 @@ const EssentialSkillsFilter = ({
   onChange,
   onSkillRemove,
 }: Props) => {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const filteredSkillsList = skillsList.filter((skill) =>
+    skill.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
     <div className="border-b border-slate-300 pb-5">
       <h4 className="text-md font-semibold my-2">Essential Skills</h4>
+      <input
+        type="text"
+        value={searchInput}
+        onChange={handleSearchChange}
+        placeholder="Search skills"
+        className="border border-gray-300 rounded px-3 py-1 mb-2"
+        style={{ width: "200px" }}
+      />
       <select
         className="border border-gray-300 rounded px-3 py-1"
         multiple
@@ -23,7 +41,7 @@ const EssentialSkillsFilter = ({
         onChange={onChange}
         style={{ width: "200px" }}
       >
-        {skillsList.map((skill, index) => (
+        {filteredSkillsList.map((skill, index) => (
           <option key={index} value={skill}>
             {skill}
           </option>

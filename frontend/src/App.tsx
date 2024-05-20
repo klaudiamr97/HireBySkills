@@ -6,12 +6,9 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-// import EmployerAccount from "./pages/EmployerAccount";
-import CandidateAccount from "./pages/CandidateAccount";
 import JobListing from "./pages/JobListing";
 import About from "./pages/About";
 import CareerGuide from "./pages/CareerGuide";
-import MyJobs from "./pages/MyJobs";
 import LogIn from "./pages/LogIn";
 import AddJobListing from "./pages/AddJobListing";
 import { useAppContext } from "./contexts/AppContext";
@@ -51,13 +48,11 @@ const App = () => {
         {isLoggedIn && (
           <>
             <Route path="/add-job-listing" element={<AddJobListing />} />
-            <Route path="/myjobs" element={<MyJobs />} />
             <Route
               path="/joblistings/:listingId/application"
               element={<JobApplication />}
             />
 
-            <Route path="/candidateaccount" element={<CandidateAccount />} />
             <Route path="/my-account" element={<MyAccount />} />
             <Route
               path="/edit-job-listing/:listingId"

@@ -108,7 +108,7 @@ const Home = () => {
                       </h5>
                       <p>{item.description}</p>
                     </div>
-                    <div className="pt-4 text-right">
+                    <div className="text-right">
                       <a
                         href={item.link}
                         className="text-purple font-semibold hover:underline"

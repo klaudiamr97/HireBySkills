@@ -103,15 +103,15 @@ const Home = () => {
                 <div className="bg-body h-96 mx-4 rounded-xl flex-grow relative overflow-hidden">
                   <div className="absolute inset-4 bg-white rounded-xl p-6 flex flex-col justify-between">
                     <div>
-                      <h5 className="text-lg font-bold pb-5">
+                      <h5 className="text-lg font-bold pb-4">
                         <a href={item.link}>{item.title}</a>
                       </h5>
                       <p>{item.description}</p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right ">
                       <a
                         href={item.link}
-                        className="text-purple font-semibold hover:underline"
+                        className="text-purple  font-semibold hover:underline"
                       >
                         Read More
                       </a>

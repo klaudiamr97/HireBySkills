@@ -4,18 +4,17 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import postRoutes from "./routes/posts.js";
-import jobApplicationRoutes from "./routes/jobApplications.js"; // Ensure this path is correct
+import jobApplicationRoutes from "./routes/jobApplications.js";
 
 const app = express();
 
-// Increase the body parser limits to handle larger payloads
-app.use(bodyParser.json({ limit: "50mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "70mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "70mb", extended: true }));
 
 app.use(cors());
 
 app.use("/posts", postRoutes);
-app.use("/api/joblistings", jobApplicationRoutes); // Adjust the path as necessary
+app.use("/api/joblistings", jobApplicationRoutes);
 
 const CONNECTION_URL = "your-mongodb-connection-string";
 

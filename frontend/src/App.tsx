@@ -19,7 +19,6 @@ import MyAccount from "./pages/MyAccount";
 import CareerTransitionsPage from "./pages/CareerTransitionaPage";
 import InDemandSkillsPage from "./pages/InDemandSkillsPage";
 import RemoteWorkTipsPage from "./pages/RemoteWorkTipsPage";
-// import ApplicationSubmitted from "./pages/ApplicationSubmitted";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();

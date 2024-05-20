@@ -28,7 +28,7 @@ const CareerGuide = () => {
             />
           </div>
           <div className="md:w-1/2 p-8">
-            <h4 className="py-8 text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
+            <h4 className="py-8 text-3xl leading-normal xl:text-4xl font-bold font-heading tracking-px-n">
               Mastering the Art of Career Transitions: A Step-by-Step Guide
             </h4>
             <p>
@@ -52,7 +52,7 @@ const CareerGuide = () => {
       <section className="bg-body">
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="md:w-1/2 p-8">
-            <h4 className="py-8 text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
+            <h4 className="py-8 text-3xl leading-normal xl:text-4xl font-bold font-heading tracking-px-n">
               Top 10 Most In-Demand Skills for the Modern Job Market
             </h4>
             <p>
@@ -89,7 +89,7 @@ const CareerGuide = () => {
             />
           </div>
           <div className="md:w-1/2 p-8">
-            <h4 className="py-8 text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
+            <h4 className="py-8 text-3xl leading-normal xl:text-4xl font-bold font-heading tracking-px-n">
               Navigating Remote Work: Tips for Success in the Virtual Office
             </h4>
             <p>

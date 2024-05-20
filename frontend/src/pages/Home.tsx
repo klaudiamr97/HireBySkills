@@ -56,7 +56,7 @@ const Home = () => {
       <section className="bg-white overflow-hidden">
         <div className="container py-20 mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="md:w-1/2 flex flex-col p-4">
-            <h4 className="text-3xl leading-normal xl:text-5xl font-bold font-heading tracking-px-n">
+            <h4 className="text-3xl leading-normal xl:text-4xl font-bold font-heading tracking-px-n">
               Match your skills with job offers
             </h4>
           </div>
@@ -72,7 +72,7 @@ const Home = () => {
         </div>
 
         <div className="relative pb-10 z-10 px-4 mx-auto bg-body text-center">
-          <h4 className="py-16 text-3xl md:text-6xl font-bold font-heading tracking-px-n leading-tight">
+          <h4 className="py-16 text-3xl md:text-4xl font-bold font-heading tracking-px-n leading-tight">
             How It Works
           </h4>
           <div className="container mx-auto flex flex-wrap justify-center">
@@ -94,7 +94,7 @@ const Home = () => {
         </div>
 
         <div className="container pb-24 px-4 mx-auto">
-          <h4 className="py-16 text-3xl md:text-6xl text-center font-bold font-heading tracking-px-n leading-tight">
+          <h4 className="py-16 text-3xl md:text-4xl text-center font-bold font-heading tracking-px-n leading-tight">
             Career Guide
           </h4>
           <div className="flex flex-wrap justify-between">

@@ -7,10 +7,7 @@ const About = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <Hero
-        title="Empowering Careers, Connecting Futures Who We Are"
-        imgSrc={GlobalWork}
-      />
+      <Hero title="Connecting Talent with Opportunity" imgSrc={GlobalWork} />
       <section className="py-20 bg-white overflow-hidden flex-grow">
         <div className="container px-4 mx-auto">
           <div className="mb-10">

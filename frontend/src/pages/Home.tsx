@@ -44,7 +44,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="w-screen overflow-hidden flex flex-col min-h-screen">
+    <div className="w-full overflow-x-hidden flex flex-col min-h-screen">
       <Header />
       <Hero
         title="Unlock Your Potential
@@ -71,7 +71,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="relative pb-10 z-10 px-4 mx-auto bg-body text-center">
+        <div className="relative pb-10 z-10 px-4 mx-auto bg-body text-center overflow-hidden">
           <h4 className="py-16 text-3xl md:text-4xl font-bold font-heading tracking-px-n leading-tight">
             How It Works
           </h4>
@@ -93,14 +93,14 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="container pb-24 px-4 mx-auto">
+        <div className="container pb-24 px-4 mx-auto overflow-hidden">
           <h4 className="py-16 text-3xl md:text-4xl text-center font-bold font-heading tracking-px-n leading-tight">
             Career Guide
           </h4>
           <div className="flex flex-wrap justify-between">
             {careerGuideItems.map((item, index) => (
               <div key={index} className="w-full md:w-1/3 p-4">
-                <div className="bg-body h-96 mx-4 rounded-xl flex-grow relative">
+                <div className="bg-body h-96 mx-4 rounded-xl flex-grow relative overflow-hidden">
                   <div className="absolute inset-4 bg-white rounded-xl p-6 flex flex-col justify-between">
                     <div>
                       <h5 className="text-lg font-bold pb-5">

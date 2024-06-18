@@ -61,8 +61,8 @@ const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
     });
 
     onSave(formData);
-    navigate(`/my-account`);
     reset();
+    navigate(`/my-account`);
   });
 
   return (

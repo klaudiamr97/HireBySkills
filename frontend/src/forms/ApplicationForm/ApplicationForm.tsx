@@ -60,14 +60,14 @@ const ApplicationForm = ({ currentUser }: Props) => {
     try {
       const cvFile = formData.cv[0];
       const cvBase64 = await convertFileToBase64(cvFile);
-      const cvBase64Content = cvBase64.split(",")[1]; // Remove metadata prefix
+      const cvBase64Content = cvBase64.split(",")[1];
 
       let coverLetterBase64Content;
       let coverLetterName;
       if (formData.coverLetter && formData.coverLetter.length > 0) {
         const coverLetterFile = formData.coverLetter[0];
         const coverLetterBase64 = await convertFileToBase64(coverLetterFile);
-        coverLetterBase64Content = coverLetterBase64.split(",")[1]; // Remove metadata prefix
+        coverLetterBase64Content = coverLetterBase64.split(",")[1];
         coverLetterName = coverLetterFile.name;
       }
 

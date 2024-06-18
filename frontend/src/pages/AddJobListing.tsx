@@ -8,9 +8,11 @@ const AddJobListing = () => {
   const { mutate, isLoading } = useMutation(apiClient.addMyJobListing, {
     onSuccess: () => {
       console.log("Job listing saved!");
+      alert("Job listing saved!");
     },
     onError: () => {
       console.log("Error saving Job Listing");
+      alert("Error adding job listing");
     },
   });
   const handleSave = (JobListingFormData: FormData) => {

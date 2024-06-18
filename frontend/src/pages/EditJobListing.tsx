@@ -19,9 +19,11 @@ const EditJobListing = () => {
   const { mutate, isLoading } = useMutation(apiClient.updateMyJobListingById, {
     onSuccess: () => {
       console.log("Job listing updated!");
+      alert("Job listing updated!");
     },
     onError: () => {
       console.log("Job listing update unsuccessful");
+      alert("Error updating job listing");
     },
   });
 

@@ -15,46 +15,51 @@ const About = () => {
               Our Goals
             </h4>
             <p>
-              We built this platform with a clear mission — to empower career
-              changers and individuals entering the job market. Instead of
-              traditional job searches, candidates simply list their soft and
-              professional skills. Our system then utilizes advanced matching
-              algorithms to connect them with job listings that align perfectly
-              with their unique skill set. It's a revolutionary approach to job
-              hunting, ensuring that candidates find opportunities that resonate
-              with their abilities and aspirations.
+              At HireBySkills, our mission is to bridge the gap between job
+              seekers and employers, making the hiring process smooth and
+              efficient. Whether you are entering the job market for the first
+              time or looking to make a career change, we are here to support
+              you every step of the way. We aim to empower candidates with the
+              tools and resources they need to find the perfect job and help
+              employers discover the best talent to meet their needs.
             </p>
           </div>
           <div className="mb-10">
             <h4 className="mb-10 text-3xl  xl:text-10xl font-bold font-heading tracking-px-n leading-none">
-              For candidates
+              For Candidates
             </h4>
             <p>
-              Embarking on a new career path can be challenging, especially when
-              navigating the intricacies of skill matching. At our platform, we
-              understand this struggle. For candidates, the process is simple —
-              just fill out your profile with skills and upload your CV. Our
-              system takes it from there, presenting you with job opportunities
-              perfectly tailored to your abilities. But that's not all; we go
-              the extra mile by offering expert articles with valuable job
-              advice and unwavering support from the initial search to the
-              successful completion of your interview. Your journey to a
-              fulfilling career starts here.
+              We understand that finding the right job can be a challenging and
+              sometimes overwhelming process. That's why we have designed our
+              platform to be user-friendly and intuitive, enabling you to find
+              job opportunities that match your skills and aspirations
+              effortlessly. You can filter jobs based on essential and optional
+              skills, location, and job title, ensuring that you find positions
+              that are a perfect fit for your abilities and preferences. Once
+              you find a job listing that excites you, simply submit your CV
+              through our platform. Additionally, we offer a wealth of expert
+              articles that provide valuable job advice, tips on crafting the
+              perfect CV, interview techniques, and career development
+              strategies to help you succeed.
             </p>
           </div>
           <div className="mb-10">
             <h4 className="mb-10 text-3xl  xl:text-10xl font-bold font-heading tracking-px-n leading-none">
-              For employers
+              For Employers
             </h4>
             <p>
-              Finding the right talent just got easier. Our platform streamlines
-              the hiring process for employers, offering a swift and efficient
-              way to discover ideal candidates. Job listings are automatically
-              matched with candidates whose skills align seamlessly,
-              significantly reducing the time and effort traditionally spent on
-              recruitment. Beyond matching, the platform provides tools for
-              scheduling interviews and managing candidate responses, making the
-              entire hiring process smoother and more time-effective.
+              At HireBySkills, we recognise the importance of finding the right
+              talent to drive your business forward. Our platform is designed to
+              streamline the hiring process, making it easier than ever to
+              connect with qualified candidates. You can add your job listings
+              with ease, specifying essential and optional skills to attract the
+              most suitable candidates. Our advanced filtering system allows
+              candidates to find your job postings based on their skill set,
+              location, and job preferences, ensuring that you receive
+              applications from highly relevant candidates. Moreover, gain
+              access to expert articles and resources that provide insights into
+              hiring best practices, industry trends, and strategies to enhance
+              your recruitment process.
             </p>
           </div>
         </div>

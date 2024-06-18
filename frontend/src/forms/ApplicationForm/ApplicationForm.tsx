@@ -98,10 +98,8 @@ const ApplicationForm = ({ currentUser }: Props) => {
         coverLetterName: coverLetterName,
       };
 
-      // Submit the form data to the API
       submitApplication(applicationData);
       navigate(`/my-account`);
-      // Navigate to a success page or perform any other actions
     } catch (error) {
       console.error("Error submitting application:", error);
     }

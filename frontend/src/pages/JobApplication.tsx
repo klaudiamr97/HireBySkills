@@ -3,8 +3,6 @@ import * as apiClient from "../api-client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ApplicationForm from "../forms/ApplicationForm/ApplicationForm";
-import Hero from "../components/Hero";
-import Collaboration from "../assets/Collaborate .png";
 import { useParams } from "react-router-dom";
 
 const JobApplication = () => {
@@ -32,17 +30,13 @@ const JobApplication = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen ">
       <Header />
-      <Hero
-        title="Unlock Your Potential
-        Find the Perfect Career Match Today!"
-        imgSrc={Collaboration}
-      />
-      <main className="flex-grow py-8">
-        <section className="container bg-purple mx-auto grid md:grid-cols-[1fr_2fr] gap-8">
+
+      <main className="flex-grow bg-body pt-16 px-4">
+        <section className="container bg-purple mx-auto grid md:grid-cols-[1fr_2fr] ">
           <div className="rounded bg-white border border-dark-purple p-4">
-            <h3 className="text-lg font-bold mb-4">Job Details Summary</h3>
+            <h3 className="text-3xl font-bold pb-6">Job Details Summary</h3>
             <div>
               <p>
                 <strong>Job Title:</strong> {listing.jobTitle}

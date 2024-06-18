@@ -3,7 +3,7 @@ import DetailsSection from "./DetailsSection";
 import EssentialTypeSection from "./EssentialSkills";
 import OptionalTypeSection from "./OptionalSkills";
 import { JobListingType } from "../../../../backend/src/shared/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export type JobListingFormData = {
@@ -18,7 +18,7 @@ export type JobListingFormData = {
 
 type Props = {
   listing?: JobListingType;
-  onSave: (formData: FormData) => Promise<void>;
+  onSave: (JobListingFormData: FormData) => void;
   isLoading: boolean;
 };
 
@@ -37,15 +37,13 @@ const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
   });
   const { handleSubmit, reset } = formMethods;
 
-  const [promptMessage, setPromptMessage] = useState<string>("");
-
   useEffect(() => {
     if (listing) {
       reset(listing);
     }
   }, [listing, reset]);
 
-  const onSubmit = handleSubmit(async (formDataJson: JobListingFormData) => {
+  const onSubmit = handleSubmit((formDataJson: JobListingFormData) => {
     const formData = new FormData();
     if (listing) {
       formData.append("listingId", listing._id);
@@ -62,15 +60,9 @@ const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
       formData.append(`optionalSkills[${index}]`, optionalSkill);
     });
 
-    try {
-      await onSave(formData);
-      setPromptMessage("Job successfully added");
-      reset(); // Reset the form after successful submission
-      navigate(`/my-account`);
-    } catch (error) {
-      console.error("Error adding job listing:", error);
-      setPromptMessage("Error adding job listing");
-    }
+    onSave(formData);
+    navigate(`/my-account`);
+    reset();
   });
 
   return (
@@ -97,11 +89,6 @@ const ManageJobListingForm = ({ onSave, isLoading, listing }: Props) => {
               </div>
             </form>
           </FormProvider>
-          {promptMessage && (
-            <div className="mt-4 text-center text-lg text-purple">
-              {promptMessage}
-            </div>
-          )}
         </div>
       </section>
     </div>

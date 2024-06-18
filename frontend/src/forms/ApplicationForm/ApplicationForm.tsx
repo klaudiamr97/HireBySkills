@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { UserType } from "../../../../backend/src/shared/types";
 import * as apiClient from "../../api-client";
 import { useNavigate, useParams } from "react-router-dom";
-import { useMutation } from "react-query";
 
 type Props = {
   currentUser: UserType;
@@ -33,19 +32,6 @@ const ApplicationForm = ({ currentUser }: Props) => {
     company: string;
     location: string;
   }>();
-
-  const { mutate: submitApplication, isLoading } = useMutation(
-    apiClient.submitApplication,
-    {
-      onSuccess: () => {
-        console.log("Application successful");
-        reset(); // Reset the form on successful submission
-      },
-      onError: () => {
-        console.log("Application failed");
-      },
-    }
-  );
 
   const { handleSubmit, register, reset } = useForm<ApplicationFormData>({
     defaultValues: {
@@ -98,10 +84,19 @@ const ApplicationForm = ({ currentUser }: Props) => {
         coverLetterName: coverLetterName,
       };
 
-      submitApplication(applicationData);
+      await apiClient.submitApplication(applicationData);
+
+      console.log("Application successful");
+      alert("Application Successful");
+      reset(); // Reset the form on successful submission
       navigate(`/my-account`);
     } catch (error) {
       console.error("Error submitting application:", error);
+      alert(
+        `Error submitting application: ${
+          error instanceof Error ? error.message : "Unknown error occurred."
+        }`
+      );
     }
   };
 
@@ -164,11 +159,10 @@ const ApplicationForm = ({ currentUser }: Props) => {
         </label>
         <div className="flex justify-end">
           <button
-            disabled={isLoading}
             type="submit"
-            className="py-3 px-9 text-offwhite disabled:bg-white font-medium border border-black-tint rounded-xl focus:ring focus:ring-black-tint bg-black-tint hover:bg-body hover:text-black-tint transition ease-in-out duration-200"
+            className="py-3 px-9 text-offwhite font-medium border border-black-tint rounded-xl focus:ring focus:ring-black-tint bg-black-tint hover:bg-body hover:text-black-tint transition ease-in-out duration-200"
           >
-            {isLoading ? "Saving..." : "Apply"}
+            Apply
           </button>
         </div>
       </div>

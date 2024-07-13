@@ -63,18 +63,18 @@ Usage
 
 You can use this website from two perspectives: Job seeker and employer. 
 
-Employeer
+Employer
 
-- Register or log in.
+- Register or login.
 - Navigate to Account.
 - Use the 'Add job listing' button to create a new job listing.
-- Fill out job listing details. Remember to choose Essential and Optional skills from the drop-down lists. This will allow job seekers to find your job offer.
+- Fill out job listing details. Remember to choose Essential and Optional Skills from the drop-down lists. This will allow job seekers to find your job offer.
 - Once submitted, your job listing will be visible in your Account, where you can modify it.
 - You will also be able to see applications submitted for your job offer.
 
 Job seeker
 
-- Register or log in.
+- Register or login.
 - Navigate to Jobs and filter them using your selected skills.
 - Apply to job offers.
 - Once the application has been submitted, you will be able to see the log of your applications in your Account.

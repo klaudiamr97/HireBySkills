@@ -93,10 +93,10 @@ const CandidateInfoForm = ({ listingId }: Props) => {
       email: data.email,
     };
 
-    // Log formData to the console instead of submitting to an API
+
     console.log("Form Data:", formData);
 
-    // Navigate to a success page or perform any other actions
+   
     clearFormDataFromLocalStorage();
     navigate(`/joblistings/${listingId}/application`);
   };

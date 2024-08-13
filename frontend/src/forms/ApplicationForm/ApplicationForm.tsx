@@ -88,7 +88,7 @@ const ApplicationForm = ({ currentUser }: Props) => {
 
       console.log("Application successful");
       alert("Application Successful");
-      reset(); // Reset the form on successful submission
+      reset(); 
       navigate(`/my-account`);
     } catch (error) {
       console.error("Error submitting application:", error);

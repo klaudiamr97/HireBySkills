@@ -87,7 +87,7 @@ const MyApplications = () => {
             )}
             <span className="flex justify-end mt-4">
               <Link
-                to={`/job-listing/${listing._id}`}
+                to={`/joblistings/${listing._id}`}
                 className="py-2 sm:py-3 px-4 sm:px-7 text-white font-medium border border-purple rounded-xl focus:ring focus:ring-purple bg-purple hover:bg-dark-purple transition ease-in-out duration-200 disabled:bg-dark-purple"
               >
                 See More Details

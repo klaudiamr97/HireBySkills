@@ -5,6 +5,7 @@ Users can filter job listings by selected skills, enabling the system to offer p
 Main features of HireBySkills
 - User authentication
 - Job listing creation and management
+- Filtering jobs with skills
 - Job application
 - Responsive design
 

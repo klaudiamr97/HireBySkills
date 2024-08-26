@@ -99,7 +99,7 @@ router.put(
       );
 
       if (!listing) {
-        return res.status(404).json({ message: "Hotel not found" });
+        return res.status(404).json({ message: "Job listing not found" });
       }
 
       const files = req.files as Express.Multer.File[];
